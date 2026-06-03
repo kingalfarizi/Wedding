@@ -189,3 +189,9 @@ svg {
     position: relative;
     z-index: 1;
 }
+
+.arch-divider{
+    height:80px;
+    background:#c8a27c;
+    border-radius:100% 100% 0 0;
+}
