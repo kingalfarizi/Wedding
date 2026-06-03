@@ -45,6 +45,19 @@ html[data-bs-theme="light"] .btn-transparent {
     z-index: 1056;
 }
 
+/* Background Welcome Page */
+#welcome {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.35)
+        ),
+        url('../assets/images/1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 html[data-bs-theme="light"] .color-theme-svg {
     color: rgb(255, 255, 255);
     background-color: var(--bs-light);
