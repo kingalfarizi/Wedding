@@ -131,12 +131,14 @@ svg {
 .section-home {
     background: url('../assets/images/111.jpg') center center/cover no-repeat;
     position: relative;
+    padding-bottom: 80px;
 }
 
 /* Mempelai */
 .section-bride {
     background: url('../assets/images/222.jpg') center center/cover no-repeat;
     position: relative;
+    padding-top: 80px;
 }
 
 /* Love Story */
@@ -190,8 +192,3 @@ svg {
     z-index: 1;
 }
 
-.arch-divider{
-    height:80px;
-    background:#c8a27c;
-    border-radius:100% 100% 0 0;
-}
