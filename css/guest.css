@@ -133,6 +133,23 @@ svg {
     position: relative;
 }
 
+.section-home::after{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:120px;
+
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        rgba(70,40,20,0.9)
+    );
+
+    z-index:1;
+}
+
 /* Fade keluar dari section pertama */
 .section-blend-bottom::after {
     content: "";
@@ -173,6 +190,23 @@ svg {
 .section-bride {
     background: url('../assets/images/222.jpg') center center/cover no-repeat;
     position: relative;
+}
+
+.section-bride::before{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    height:120px;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(70,40,20,0.9),
+        transparent
+    );
+
+    z-index:1;
 }
 
 /* Love Story */
