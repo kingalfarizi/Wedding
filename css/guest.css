@@ -47,28 +47,35 @@ html[data-bs-theme="light"] .btn-transparent {
 
 /* Background Welcome Page */
 #welcome {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.35),
-            rgba(0, 0, 0, 0.35)
-        ),
-        url('../assets/images/000.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-     display: flex !important;
+    display: flex !important;
     justify-content: center !important;
-    align-items: center !important;
 }
 
 #welcome .d-flex.flex-column {
     color: #ffffff;
 }
 
+#welcome::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    max-width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('../assets/images/1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
 #welcome > div {
-    width: 480px !important;
-    max-width: 100% !important;
-    height: 100vh;
+    width: 480px;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 html[data-bs-theme="light"] .color-theme-svg {
