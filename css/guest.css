@@ -226,3 +226,11 @@ svg {
     color: #212529 !important;
     border-color: #212529 !important;
 }
+
+#root {
+    justify-content: center;
+}
+
+#root > .col-12 {
+    max-width: 480px;
+}
