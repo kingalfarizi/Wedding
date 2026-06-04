@@ -191,7 +191,8 @@ svg {
 .section-date > *,
 .section-gallery > *,
 .section-gift > *,
-.section-comment > * {
+.section-comment > *,
+.section-foot > * {
     position: relative;
     z-index: 1;
 }
