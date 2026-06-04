@@ -175,7 +175,7 @@ svg {
 .section-date::before,
 .section-gallery::before,
 .section-gift::before,
-.section-comment::before
+.section-comment::before,
 .section-foot::before {
     content: "";
     position: absolute;
