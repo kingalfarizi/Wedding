@@ -58,6 +58,11 @@ html[data-bs-theme="light"] .btn-transparent {
     background-repeat: no-repeat;
 }
 
+#welcome .d-flex.flex-column {
+    color: #ffffff;
+}
+
+
 html[data-bs-theme="light"] .color-theme-svg {
     color: rgb(255, 255, 255);
     background-color: var(--bs-light);
