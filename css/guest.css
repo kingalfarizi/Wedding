@@ -240,7 +240,8 @@ svg {
     max-width: 480px;
 }
 
-#welcome .d-flex.flex-column {
-    width: 100%;
+#welcome .d-flex.justify-content-center {
     max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
 }
