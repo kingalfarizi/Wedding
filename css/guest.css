@@ -197,3 +197,19 @@ svg {
     z-index: 1;
 }
 
+/* Semua section pakai teks putih */
+.section-home, .section-bride, .section-story,
+.section-date, .section-gallery, .section-gift, .section-foot {
+    color: #ffffff !important;
+}
+
+.section-home .btn-outline-auto,
+.section-bride .btn-outline-auto,
+.section-story .btn-outline-auto,
+.section-date .btn-outline-auto,
+.section-gallery .btn-outline-auto,
+.section-gift .btn-outline-auto,
+.section-foot .btn-outline-auto {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
