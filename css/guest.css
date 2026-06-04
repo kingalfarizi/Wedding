@@ -163,6 +163,11 @@ svg {
     position: relative;
 }
 
+.section-foot {
+    background: url('../assets/images/999.jpg') center center/cover no-repeat;
+    position: relative;
+}
+
 /* Overlay agar tulisan tetap terbaca */
 .section-home::before,
 .section-bride::before,
