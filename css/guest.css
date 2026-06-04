@@ -56,12 +56,20 @@ html[data-bs-theme="light"] .btn-transparent {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+     display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 #welcome .d-flex.flex-column {
     color: #ffffff;
 }
 
+#welcome > div {
+    width: 480px !important;
+    max-width: 100% !important;
+    height: 100vh;
+}
 
 html[data-bs-theme="light"] .color-theme-svg {
     color: rgb(255, 255, 255);
@@ -244,4 +252,14 @@ svg {
     max-width: 480px;
     margin: 0 auto;
     width: 100%;
+}
+
+#welcome.loading-page {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+#welcome.loading-page > div {
+    width: 480px !important;
+    max-width: 100%;
 }
