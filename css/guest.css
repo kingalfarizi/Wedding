@@ -239,3 +239,8 @@ svg {
 #root > .col-12 {
     max-width: 480px;
 }
+
+#welcome .d-flex.flex-column {
+    width: 100%;
+    max-width: 480px;
+}
