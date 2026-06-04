@@ -213,3 +213,16 @@ svg {
     color: #ffffff !important;
     border-color: #ffffff !important;
 }
+
+/* Fix teks di dalam card agar tetap gelap */
+.section-story .bg-theme-auto,
+.section-gift .bg-theme-auto {
+    color: #212529 !important;
+}
+
+/* Fix juga tombol di dalam card */
+.section-story .bg-theme-auto .btn-outline-auto,
+.section-gift .bg-theme-auto .btn-outline-auto {
+    color: #212529 !important;
+    border-color: #212529 !important;
+}
