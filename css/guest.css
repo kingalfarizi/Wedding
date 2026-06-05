@@ -270,3 +270,10 @@ svg {
     width: 480px !important;
     max-width: 100%;
 }
+
+/* Sembunyikan scrollbar global */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none !important;
+}
