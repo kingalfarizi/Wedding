@@ -114,16 +114,45 @@
                     </div>
                 </section>
 
-                                    <!-- Divider Image -->
-                    <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
-                        <img 
-                            src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave0.jpg" 
-                            alt="divider" 
-                            class="img-fluid w-100" 
-                            style="object-fit: cover; max-height: 400px;"
-                        >
-                    </section>
+                    !-- Divider Image - Parallax --!
+<section class="section-divider p-0 m-0 position-relative overflow-hidden" style="height: 400px;">
+    <div class="parallax-divider position-absolute w-100" style="
+        top: -30%;
+        height: 160%;
+        background-image: url('./assets/images/wave0.jpg');
+        background-size: cover;
+        background-position: center;
+        will-change: transform;
+    " data-src="./assets/images/divider.png"></div>
+</section>
+
+<script>
+    (function () {
+        const el = document.querySelector('.parallax-divider');
+
+        // Lazy load image
+        if (el.dataset.src) {
+            el.style.backgroundImage = `url('${el.dataset.src}')`;
+        }
+
+        function updateParallax() {
+            const section = el.parentElement;
+            const rect = section.getBoundingClientRect();
+            const viewH = window.innerHeight;
+
+            // Hanya jalankan saat section terlihat
+            if (rect.bottom < 0 || rect.top > viewH) return;
+
+            const progress = (viewH - rect.top) / (viewH + rect.height);
+            const shift = (progress - 0.5) * 120; // px pergeseran, sesuaikan sesuai selera
+
+            el.style.transform = `translateY(${shift}px)`;
+        }
+
+        window.addEventListener('scroll', updateParallax, { passive: true });
+        updateParallax();
+    })();
+</script>
                 
                 <!-- Bride -->
                 <section class="section-bride text-center" id="bride">
