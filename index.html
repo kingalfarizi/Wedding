@@ -733,7 +733,25 @@
     </div>
 
     <!-- Loading Page -->
-    <div class="loading-page" id="loading" style="opacity: 1; background-image: url('./assets/images/000.jpg'); background-size: cover; background-position: center;">
+    <div class="loading-page" id="loading" style="opacity: 1; display: flex; justify-content: center;">
+    
+    <!-- Background image sama seperti welcome -->
+    <div style="
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 480px;
+        max-width: 100%;
+        height: 100%;
+        background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/000.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 0;
+    "></div>
+
+
         <div class="d-flex justify-content-center align-items-center vh-100 overflow-y-auto">
             <div class="d-flex flex-column width-loading text-center">
                 <div class="progress" role="progressbar" style="height: 0.5rem;" aria-label="progress bar">
