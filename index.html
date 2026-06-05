@@ -114,68 +114,16 @@
                     </div>
                 </section>
 
-                                    <!-- Divider Image - Curtain Effect -->
-<section class="section-divider p-0 m-0 position-relative overflow-hidden">
-
-    <!-- Gambar di belakang -->
-    <div class="curtain-image w-100" style="
-        height: 400px;
-        background-image: url('./assets/images/wave0.jpg');
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-    " data-src="./assets/images/wave0.jpg"></div>
-
-    <!-- Curtain kiri -->
-    <div class="curtain-left position-absolute top-0 start-0 h-100" style="
-        width: 50%;
-        background-color: var(--bs-body-bg, #fff);
-        transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
-        will-change: transform;
-    "></div>
-
-    <!-- Curtain kanan -->
-    <div class="curtain-right position-absolute top-0 end-0 h-100" style="
-        width: 50%;
-        background-color: var(--bs-body-bg, #fff);
-        transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
-        will-change: transform;
-    "></div>
-
-</section>
-
-<script>
-    (function () {
-        const image = document.querySelector('.curtain-image');
-        const curtainLeft = document.querySelector('.curtain-left');
-        const curtainRight = document.querySelector('.curtain-right');
-
-        // Lazy load image
-        if (image.dataset.src) {
-            image.style.backgroundImage = `url('${image.dataset.src}')`;
-        }
-
-        let triggered = false;
-
-        function checkVisibility() {
-            if (triggered) return;
-
-            const rect = image.getBoundingClientRect();
-            const viewH = window.innerHeight;
-
-            if (rect.top < viewH * 0.85 && rect.bottom > 0) {
-                triggered = true;
-
-                // Buka curtain ke kiri dan kanan
-                curtainLeft.style.transform = 'translateX(-100%)';
-                curtainRight.style.transform = 'translateX(100%)';
-            }
-        }
-
-        window.addEventListener('scroll', checkVisibility, { passive: true });
-        checkVisibility();
-    })();
-</script>
+                                    <!-- Divider Image -->
+                    <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
+                        <img 
+                            src="./assets/images/placeholder.webp" 
+                            data-src="./assets/images/wave0.jpg" 
+                            alt="divider" 
+                            class="img-fluid w-100" 
+                            style="object-fit: cover; max-height: 400px;"
+                        >
+                    </section>
                 
                 <!-- Bride -->
                 <section class="section-bride text-center" id="bride">
