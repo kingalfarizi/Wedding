@@ -114,42 +114,61 @@
                     </div>
                 </section>
 
-                                    <!-- Divider Image - Fade + Zoom In -->
+                                    <!-- Divider Image - Curtain Effect -->
 <section class="section-divider p-0 m-0 position-relative overflow-hidden">
-    <div class="parallax-divider w-100" style="
+
+    <!-- Gambar di belakang -->
+    <div class="curtain-image w-100" style="
         height: 400px;
         background-image: url('./assets/images/wave0.jpg');
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
-        will-change: transform, opacity;
-        opacity: 0;
-        transform: scale(1.15);
-        transition: opacity 0.8s ease, transform 0.8s ease;
     " data-src="./assets/images/wave0.jpg"></div>
+
+    <!-- Curtain kiri -->
+    <div class="curtain-left position-absolute top-0 start-0 h-100" style="
+        width: 50%;
+        background-color: var(--bs-body-bg, #fff);
+        transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
+        will-change: transform;
+    "></div>
+
+    <!-- Curtain kanan -->
+    <div class="curtain-right position-absolute top-0 end-0 h-100" style="
+        width: 50%;
+        background-color: var(--bs-body-bg, #fff);
+        transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
+        will-change: transform;
+    "></div>
+
 </section>
 
 <script>
     (function () {
-        const el = document.querySelector('.parallax-divider');
+        const image = document.querySelector('.curtain-image');
+        const curtainLeft = document.querySelector('.curtain-left');
+        const curtainRight = document.querySelector('.curtain-right');
 
         // Lazy load image
-        if (el.dataset.src) {
-            el.style.backgroundImage = `url('${el.dataset.src}')`;
+        if (image.dataset.src) {
+            image.style.backgroundImage = `url('${image.dataset.src}')`;
         }
 
+        let triggered = false;
+
         function checkVisibility() {
-            const rect = el.getBoundingClientRect();
+            if (triggered) return;
+
+            const rect = image.getBoundingClientRect();
             const viewH = window.innerHeight;
 
-            // Trigger animasi saat elemen masuk viewport
             if (rect.top < viewH * 0.85 && rect.bottom > 0) {
-                el.style.opacity = '1';
-                el.style.transform = 'scale(1)';
-            } else {
-                // Reset saat keluar viewport (opsional, hapus jika tidak mau reset)
-                el.style.opacity = '0';
-                el.style.transform = 'scale(1.15)';
+                triggered = true;
+
+                // Buka curtain ke kiri dan kanan
+                curtainLeft.style.transform = 'translateX(-100%)';
+                curtainRight.style.transform = 'translateX(100%)';
             }
         }
 
