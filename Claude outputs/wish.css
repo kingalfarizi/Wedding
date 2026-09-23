@@ -1,0 +1,178 @@
+/* ===== Wedding Wish ===== */
+.section-wish {
+    --wish-bg: #ede4e0;
+    --wish-maroon: #561019;
+    --wish-maroon-soft: #7a2a36;
+    --wish-card: #dcc1b9;
+    --wish-input: #f6f4f3;
+    --wish-text: #3b3a36;
+    --wish-muted: #8c847d;
+
+    position: relative;
+    background-color: var(--wish-bg);
+    color: var(--wish-text);
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    padding: 3rem 0 3.5rem;
+}
+
+.section-wish *,
+.section-wish *::before,
+.section-wish *::after {
+    box-sizing: border-box;
+}
+
+.section-wish .wish-title {
+    color: var(--wish-maroon-soft);
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 0 1.5rem;
+    line-height: 1.2;
+}
+
+.section-wish .wish-wrap {
+    max-width: 430px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.section-wish .wish-input {
+    display: block;
+    width: 100%;
+    background: var(--wish-input);
+    color: var(--wish-text);
+    border: 1px solid var(--wish-maroon);
+    border-radius: 1.5rem;
+    padding: 0.6rem 1.1rem;
+    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-size: 1.05rem;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.section-wish textarea.wish-input {
+    resize: vertical;
+    min-height: 2.9rem;
+}
+
+.section-wish .wish-input::placeholder {
+    color: #a39c97;
+}
+
+.section-wish .wish-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(86, 16, 25, 0.15);
+}
+
+.section-wish .wish-btn {
+    display: block;
+    width: 100%;
+    background: var(--wish-maroon);
+    color: #fff4e3;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.6rem 1rem;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.section-wish .wish-btn:hover {
+    opacity: 0.9;
+}
+
+.section-wish .wish-btn:disabled {
+    opacity: 0.7;
+}
+
+.section-wish .wish-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.section-wish .wish-alert {
+    margin: 0.75rem 0 0;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.section-wish .wish-alert-error {
+    color: #a61b1b;
+}
+
+.section-wish .wish-alert-success {
+    color: #2f6b3a;
+}
+
+.section-wish .wish-list {
+    margin-top: 1.25rem;
+}
+
+.section-wish .wish-card {
+    background: var(--wish-card);
+    border-radius: 0.35rem;
+    padding: 0.75rem 0.6rem 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.section-wish .wish-card-new {
+    animation: wish-pop 0.5s ease;
+}
+
+.section-wish .wish-card-name {
+    color: var(--wish-maroon);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0 0 0.35rem;
+    word-break: break-word;
+}
+
+.section-wish .wish-card-time {
+    color: var(--wish-muted);
+    font-size: 0.95rem;
+    margin: 0 0 0.35rem;
+}
+
+.section-wish .wish-card-text {
+    color: var(--wish-text);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0;
+    white-space: pre-line;
+    word-break: break-word;
+}
+
+.section-wish .wish-empty {
+    text-align: center;
+    color: var(--wish-muted);
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+.section-wish .wish-more {
+    display: block;
+    margin: 0.25rem auto 0;
+    background: transparent;
+    color: var(--wish-maroon);
+    border: 1px solid var(--wish-maroon);
+    border-radius: 1.5rem;
+    padding: 0.35rem 1.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@keyframes wish-pop {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

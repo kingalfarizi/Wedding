@@ -59,6 +59,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha256-2FMn2Zx6PuH5tdBQDRNwrOo60ts5wWPC9R8jK67b3t4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css" integrity="sha256-4rTIfo5GQTi/7UJqoyUJQKzxW8VN/YBH31+Cy+vTZj4=" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/guest.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="./css/wish.css">
 
     <!-- Dependencies JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc=" crossorigin="anonymous"></script>
@@ -564,6 +566,25 @@
                     </div>
                 </section>
 
+                <!-- Wedding Wish (Google Sheets) -->
+                <!-- Isi data-wish-url dengan URL Web App Google Apps Script. Lihat PANDUAN-WEDDING-WISH.md -->
+                <section class="section-wish" id="wish" data-wish-url="https://script.google.com/macros/s/AKfycbzh1yPNqVJawSoHi4igyBR3n6tv0xy5lxU0-Mn3SU9fEjrDj5i99BwBddQWtlJXyNm2/exec">
+                    <div class="wish-wrap">
+                        <h2 class="font-esthetic wish-title" data-aos="fade-up" data-aos-duration="1500">Wedding Wish</h2>
+
+                        <form id="wish-form" autocomplete="off" novalidate data-aos="fade-up" data-aos-duration="1500">
+                            <input type="text" id="wish-name" class="wish-input" placeholder="Name" maxlength="50" autocomplete="name" aria-label="Name">
+                            <textarea id="wish-text" class="wish-input" rows="1" placeholder="Give your wish" maxlength="1000" aria-label="Give your wish"></textarea>
+                            <input type="text" id="wish-website" class="wish-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                            <button type="submit" id="wish-send" class="wish-btn">Send</button>
+                            <p id="wish-alert" class="wish-alert" role="status" hidden></p>
+                        </form>
+
+                        <div id="wish-list" class="wish-list" aria-live="polite"></div>
+                        <button type="button" id="wish-more" class="wish-more" hidden>Lihat ucapan lainnya</button>
+                    </div>
+                </section>
+
                 <!-- Comment -->
                 <section class="bg-light-dark my-0 pb-4 pt-3" id="comment">
                     <div class="container">
@@ -689,7 +710,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#comment">
+                        <a class="nav-link" href="#wish">
                             <i class="fa-solid fa-comments"></i>
                             <span class="d-block" style="font-size: 0.7rem;">Ucapan</span>
                         </a>
@@ -789,6 +810,7 @@
             </div>
         </div>
     </div>
+    <script defer src="./assets/js/wish.js"></script>
 </body>
 
 </html>
