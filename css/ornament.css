@@ -212,3 +212,17 @@
     position: relative;
     z-index: 2;
 }
+
+/* Halaman "Undangan Pernikahan": foto blur menutupi seluruh bagian,
+   bunga di 4 sudut tampil paling depan */
+.section-home .bg-cover-home {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+.section-home > .orn {
+    z-index: 5 !important;
+}
