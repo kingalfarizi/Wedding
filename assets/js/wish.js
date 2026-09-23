@@ -67,6 +67,32 @@
         return card;
     };
 
+    // Animasi kartu ucapan: muncul bergantian saat di-scroll ke layar.
+    const revealer = 'IntersectionObserver' in window
+        ? new IntersectionObserver((entries) => {
+            let order = 0;
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                const card = entry.target;
+                card.style.setProperty('--stagger', `${Math.min(order * 0.12, 0.6)}s`);
+                card.classList.add('is-in');
+                revealer.unobserve(card);
+                order++;
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' })
+        : null;
+
+    const reveal = (card) => {
+        card.classList.add('wish-card-anim');
+        if (revealer) {
+            revealer.observe(card);
+        } else {
+            card.classList.add('is-in');
+        }
+    };
+
     const render = () => {
         list.replaceChildren();
 
@@ -77,7 +103,11 @@
             list.appendChild(empty);
         }
 
-        wishes.slice(0, shown).forEach((w) => list.appendChild(createCard(w)));
+        wishes.slice(0, shown).forEach((w) => {
+            const card = createCard(w);
+            list.appendChild(card);
+            reveal(card);
+        });
         more.hidden = wishes.length <= shown;
     };
 
@@ -138,13 +168,24 @@
                 throw new Error(json.error || 'Gagal mengirim ucapan.');
             }
 
-            wishes.unshift(json.data || { name, wish, verified: false, time: new Date().toISOString() });
-            shown = Math.max(shown, PAGE_SIZE);
-            render();
+            const item = json.data || { name, wish, verified: false, time: new Date().toISOString() };
+            wishes.unshift(item);
+
+            // Tambahkan kartu baru di paling atas tanpa menggambar ulang kartu lain,
+            // supaya kartu yang sudah tampil tidak ikut beranimasi ulang.
+            list.querySelector('.wish-empty')?.remove();
+            const card = createCard(item);
+            card.classList.add('wish-card-anim', 'is-in', 'wish-card-new');
+            list.prepend(card);
+
+            const cards = list.querySelectorAll('.wish-card');
+            if (cards.length > shown) {
+                cards[cards.length - 1].remove();
+            }
+            more.hidden = wishes.length <= shown;
 
             inputWish.value = '';
             showAlert('Terima kasih atas ucapan dan doanya!', 'success');
-            list.firstElementChild?.classList.add('wish-card-new');
         } catch (err) {
             showAlert(err.message && err.message !== 'Failed to fetch' ? err.message : 'Gagal mengirim ucapan. Periksa koneksi internet Anda.');
         } finally {
@@ -163,9 +204,16 @@
         }
     }
 
+    // "Lihat ucapan lainnya": hanya kartu baru yang ditambahkan & dianimasikan.
     more.addEventListener('click', () => {
+        const start = list.querySelectorAll('.wish-card').length;
         shown += PAGE_SIZE;
-        render();
+        wishes.slice(start, shown).forEach((w) => {
+            const card = createCard(w);
+            list.appendChild(card);
+            reveal(card);
+        });
+        more.hidden = wishes.length <= shown;
     });
 
     form.addEventListener('submit', send);

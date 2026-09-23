@@ -130,8 +130,28 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
+/* Animasi kartu ucapan */
+.section-wish .wish-card-anim {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    transition:
+        opacity 0.7s ease var(--stagger, 0s),
+        transform 0.8s cubic-bezier(.2, .8, .2, 1) var(--stagger, 0s),
+        box-shadow 0.3s ease;
+}
+
+.section-wish .wish-card-anim.is-in {
+    opacity: 1;
+    transform: none;
+}
+
+.section-wish .wish-card-anim.is-in:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+}
+
 .section-wish .wish-card-new {
-    animation: wish-pop 0.5s ease;
+    animation: wish-pop 0.7s cubic-bezier(.2, .8, .2, 1);
 }
 
 .section-wish .wish-card-name {
@@ -181,13 +201,27 @@
 }
 
 @keyframes wish-pop {
-    from {
+    0% {
         opacity: 0;
-        transform: translateY(-8px);
+        transform: translateY(-16px) scale(0.92);
     }
 
-    to {
+    60% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(2px) scale(1.02);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-wish .wish-card-anim,
+    .section-wish .wish-card-new {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        animation: none;
     }
 }
