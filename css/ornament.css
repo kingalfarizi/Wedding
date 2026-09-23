@@ -226,3 +226,30 @@
 .section-home > .orn {
     z-index: 5 !important;
 }
+
+/* Lapisan gelap + blur dibuat dengan mem-blur gambar latar itu sendiri
+   (bukan backdrop-filter), supaya area di sekitar ornamen yang bergoyang
+   tetap ter-blur rata dan tidak muncul kotak yang lebih tajam. */
+.section-home,
+.section-bride,
+.section-story,
+.section-date,
+.section-gallery,
+.section-gift,
+.section-foot {
+    overflow: clip;
+}
+
+.section-home::before,
+.section-bride::before,
+.section-story::before,
+.section-date::before,
+.section-gallery::before,
+.section-gift::before,
+.section-foot::before {
+    inset: -8px !important;
+    background: inherit !important;
+    filter: blur(2px) brightness(0.5);
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+}
