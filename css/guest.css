@@ -64,18 +64,32 @@ html[data-bs-theme="light"] .btn-transparent {
     width: 480px;
     max-width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('../assets/images/000.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    /* Lapisan gelap di atas video pembukaan agar tulisan tetap terbaca */
+    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35));
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Video latar halaman pembukaan (000.jpg dipakai sebagai gambar sementara) */
+#welcome .welcome-video {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: 0;
+    pointer-events: none;
+    background: #3a2e24 url('../assets/images/000.jpg') center / cover no-repeat;
 }
 
 #welcome > div {
     width: 480px;
     max-width: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 html[data-bs-theme="light"] .color-theme-svg {
