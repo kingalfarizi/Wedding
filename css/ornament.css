@@ -1,0 +1,206 @@
+/* =========================================================
+   ORNAMEN BUNGA + ANIMASI
+   - .orn            : pembungkus ornamen (posisi + animasi masuk AOS)
+   - .orn > img      : gambar ornamen (animasi bergoyang)
+   Posisi : .orn-tl .orn-tr .orn-bl .orn-br .orn-top .orn-bottom
+   Cermin : .orn-flip-x .orn-flip-y
+   Ukuran : style="--w: 45%"   Kecepatan goyang: style="--d: 5s"
+   ========================================================= */
+
+.orn {
+    position: absolute !important;
+    z-index: 1 !important;
+    width: var(--w, 42%);
+    max-width: var(--max, 230px);
+    pointer-events: none;
+    line-height: 0;
+    user-select: none;
+}
+
+.orn > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform-origin: var(--origin, top left);
+    animation: orn-sway var(--d, 5s) ease-in-out infinite alternate;
+    animation-delay: var(--delay, 0s);
+    will-change: transform;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+}
+
+.orn-tl { top: 0; left: 0; --origin: top left; }
+.orn-tr { top: 0; right: 0; --origin: top right; }
+.orn-bl { bottom: 0; left: 0; --origin: bottom left; }
+.orn-br { bottom: 0; right: 0; --origin: bottom right; }
+
+.orn-top,
+.orn-bottom {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    --w: 100%;
+    --max: 100%;
+    --amp: 1.2deg;
+}
+
+.orn-top { top: 0; --origin: top center; }
+.orn-bottom { bottom: 0; --origin: bottom center; }
+
+.orn-flip-x { --fx: -1; }
+.orn-flip-y { --fy: -1; }
+
+@keyframes orn-sway {
+    from {
+        transform: scale(var(--fx, 1), var(--fy, 1)) rotate(calc(var(--amp, 3deg) * -1));
+    }
+
+    to {
+        transform: scale(var(--fx, 1), var(--fy, 1)) rotate(var(--amp, 3deg));
+    }
+}
+
+/* Section yang diberi ornamen tidak boleh menimbulkan scroll horizontal */
+.section-home,
+.section-bride,
+.section-story,
+.section-date,
+.section-gallery,
+.section-gift,
+.section-wish,
+.section-foot {
+    position: relative;
+    overflow-x: clip;
+}
+
+/* Ruang ekstra supaya ornamen tidak menimpa judul */
+.section-orn-space-top { padding-top: 5.5rem !important; }
+.section-orn-space-bottom { padding-bottom: 6rem !important; }
+
+/* =========================================================
+   COVER (Welcome) - ornamen & teks muncul bergantian
+   ========================================================= */
+#welcome .welcome-inner {
+    position: relative;
+    overflow: hidden;
+}
+
+#welcome .orn {
+    z-index: 0 !important;
+}
+
+.orn-js #welcome .orn {
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(.2, .8, .2, 1), opacity 1.2s ease;
+}
+
+.orn-js #welcome .orn-top { transform: translateY(-60%); }
+.orn-js #welcome .orn-bl { transform: translate(-60%, 40%); }
+.orn-js #welcome .orn-br { transform: translate(60%, 40%); }
+.orn-js #welcome .orn-tl { transform: translate(-60%, -40%); }
+.orn-js #welcome .orn-tr { transform: translate(60%, -40%); }
+
+#welcome.orn-play .orn {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+#welcome.orn-play .orn:nth-of-type(1) { transition-delay: 0.1s; }
+#welcome.orn-play .orn:nth-of-type(2) { transition-delay: 0.35s; }
+#welcome.orn-play .orn:nth-of-type(3) { transition-delay: 0.6s; }
+#welcome.orn-play .orn:nth-of-type(4) { transition-delay: 0.85s; }
+
+#welcome .welcome-content {
+    position: relative;
+    z-index: 2;
+}
+
+.orn-js #welcome .welcome-content > * {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+#welcome.orn-play .welcome-content > * {
+    animation: orn-rise 1s cubic-bezier(.2, .8, .2, 1) forwards;
+}
+
+#welcome.orn-play .welcome-content > *:nth-child(1) { animation-delay: 0.5s; }
+#welcome.orn-play .welcome-content > *:nth-child(2) { animation-delay: 0.8s; }
+#welcome.orn-play .welcome-content > *:nth-child(3) { animation-delay: 1.1s; }
+#welcome.orn-play .welcome-content > *:nth-child(4) { animation-delay: 1.35s; }
+#welcome.orn-play .welcome-content > *:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes orn-rise {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Saat tombol "Buka Undangan" ditekan: ornamen terbuka ke luar */
+#welcome.orn-exit .orn {
+    transition-delay: 0s !important;
+    transition-duration: 0.9s;
+    opacity: 0;
+}
+
+#welcome.orn-exit .orn-top { transform: translateY(-80%); }
+#welcome.orn-exit .orn-bl { transform: translate(-80%, 60%); }
+#welcome.orn-exit .orn-br { transform: translate(80%, 60%); }
+#welcome.orn-exit .orn-tl { transform: translate(-80%, -60%); }
+#welcome.orn-exit .orn-tr { transform: translate(80%, -60%); }
+
+/* =========================================================
+   KELOPAK BUNGA BERJATUHAN
+   ========================================================= */
+.petal-layer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: min(480px, 100%);
+    transform: translateX(-50%);
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1025;
+}
+
+.petal {
+    position: absolute;
+    top: -30px;
+    width: var(--s, 12px);
+    height: calc(var(--s, 12px) * 1.25);
+    border-radius: 150% 0 150% 0;
+    background: linear-gradient(135deg, #ffd9df 0%, #f7a8b8 55%, #ee8fa4 100%);
+    opacity: 0.85;
+    animation:
+        petal-fall var(--fall, 9s) linear forwards,
+        petal-drift var(--drift, 3s) ease-in-out infinite alternate;
+}
+
+@keyframes petal-fall {
+    0% { top: -30px; }
+    100% { top: 105%; }
+}
+
+@keyframes petal-drift {
+    from { transform: translateX(-18px) rotate(0deg); }
+    to { transform: translateX(18px) rotate(220deg); }
+}
+
+/* Hormati pengaturan "kurangi animasi" di HP pengguna */
+@media (prefers-reduced-motion: reduce) {
+    .orn > img,
+    .petal {
+        animation: none !important;
+    }
+
+    .petal-layer {
+        display: none;
+    }
+}
+
+/* Konten Wedding Wish selalu di atas ornamen */
+.section-wish .wish-wrap {
+    position: relative;
+    z-index: 2;
+}
