@@ -266,3 +266,79 @@
     transform: scale(1.08) !important;
     filter: blur(4px);
 }
+
+/* =========================================================
+   DIVIDER (gambar pembatas antar-bagian)
+   1. Saat di-scroll: terbuka dari tengah seperti tirai + memudar masuk
+   2. Setelah tampil: gambar "bernapas" (zoom & geser pelan terus-menerus)
+   3. Kilau cahaya lembut menyapu gambar secara berkala
+   ========================================================= */
+.section-divider {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background-color: #3a2e24; /* warna dasar saat tirai belum terbuka */
+}
+
+.section-divider > img {
+    display: block;
+    transform-origin: center center;
+    animation: divider-breathe 14s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes divider-breathe {
+    0% { transform: scale(1) translate3d(0, 0, 0); }
+    50% { transform: scale(1.06) translate3d(-1.2%, -1%, 0); }
+    100% { transform: scale(1.04) translate3d(1.2%, 0.8%, 0); }
+}
+
+/* Kilau cahaya */
+.section-divider::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(105deg,
+            transparent 35%,
+            rgba(255, 245, 220, 0.35) 48%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 245, 220, 0.35) 52%,
+            transparent 65%);
+    transform: translateX(-120%);
+    animation: divider-shine 7s ease-in-out infinite;
+    animation-delay: var(--shine-delay, 1.5s);
+}
+
+@keyframes divider-shine {
+    0% { transform: translateX(-120%); }
+    35%, 100% { transform: translateX(120%); }
+}
+
+/* Tirai terbuka saat pertama kali terlihat */
+.orn-js .section-divider.divider-anim > img {
+    clip-path: inset(0 50% 0 50%);
+    opacity: 0;
+    transition:
+        clip-path 1.4s cubic-bezier(.65, 0, .35, 1),
+        opacity 1s ease;
+}
+
+.orn-js .section-divider.divider-anim.is-in > img {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-divider > img,
+    .section-divider::after {
+        animation: none !important;
+    }
+
+    .orn-js .section-divider.divider-anim > img {
+        clip-path: none;
+        opacity: 1;
+        transition: none;
+    }
+}

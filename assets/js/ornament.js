@@ -93,10 +93,39 @@
         }
     }, true);
 
+    // ---------- Divider: tirai terbuka saat di-scroll ----------
+    const dividers = document.querySelectorAll('.section-divider');
+    dividers.forEach((d, i) => {
+        d.classList.add('divider-anim');
+        d.style.setProperty('--shine-delay', `${1.5 + (i % 3) * 1.2}s`);
+    });
+
+    const startDividers = () => {
+        if (!('IntersectionObserver' in window)) {
+            dividers.forEach((d) => d.classList.add('is-in'));
+            return;
+        }
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-in');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        dividers.forEach((d) => io.observe(d));
+    };
+
+    // Mulai setelah undangan dibuka, supaya animasinya terlihat oleh tamu.
+    if (!welcome) {
+        startDividers();
+    }
+
     // ---------- Saat undangan dibuka ----------
     document.addEventListener('undangan.open', () => {
         welcome?.classList.add('orn-exit');
         setTimeout(startPetals, 800);
         setTimeout(refreshAOS, 400);
+        setTimeout(startDividers, 300);
     });
 })();
