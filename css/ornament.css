@@ -1,7 +1,8 @@
 /* =========================================================
    ORNAMEN BUNGA + ANIMASI
    - .orn            : pembungkus ornamen (posisi + animasi masuk AOS)
-   - .orn > img      : gambar ornamen (animasi bergoyang)
+   - .orn-m          : lapisan cermin (flip)
+   - .orn-m > img    : gambar ornamen (animasi bergoyang)
    Posisi : .orn-tl .orn-tr .orn-bl .orn-br .orn-top .orn-bottom
    Cermin : .orn-flip-x .orn-flip-y
    Ukuran : style="--w: 45%"   Kecepatan goyang: style="--d: 5s"
@@ -17,7 +18,12 @@
     user-select: none;
 }
 
-.orn > img {
+.orn > .orn-m {
+    display: block;
+    transform: scale(var(--fx, 1), var(--fy, 1));
+}
+
+.orn > .orn-m > img {
     display: block;
     width: 100%;
     height: auto;
@@ -25,13 +31,20 @@
     animation: orn-sway var(--d, 5s) ease-in-out infinite alternate;
     animation-delay: var(--delay, 0s);
     will-change: transform;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
 }
+
+.orn { filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15)); }
 
 .orn-tl { top: 0; left: 0; --origin: top left; }
 .orn-tr { top: 0; right: 0; --origin: top right; }
 .orn-bl { bottom: 0; left: 0; --origin: bottom left; }
 .orn-br { bottom: 0; right: 0; --origin: bottom right; }
+
+/* Titik tumpu goyangan = sudut tempat bunga "menempel" pada gambar aslinya */
+.orn .orn-pivot-tl { transform-origin: top left; }
+.orn .orn-pivot-tr { transform-origin: top right; }
+.orn .orn-pivot-bl { transform-origin: bottom left; }
+.orn .orn-pivot-br { transform-origin: bottom right; }
 
 .orn-top,
 .orn-bottom {
@@ -50,13 +63,8 @@
 .orn-flip-y { --fy: -1; }
 
 @keyframes orn-sway {
-    from {
-        transform: scale(var(--fx, 1), var(--fy, 1)) rotate(calc(var(--amp, 3deg) * -1));
-    }
-
-    to {
-        transform: scale(var(--fx, 1), var(--fy, 1)) rotate(var(--amp, 3deg));
-    }
+    from { transform: rotate(calc(var(--amp, 3deg) * -1)); }
+    to { transform: rotate(var(--amp, 3deg)); }
 }
 
 /* Section yang diberi ornamen tidak boleh menimbulkan scroll horizontal */
@@ -189,7 +197,7 @@
 
 /* Hormati pengaturan "kurangi animasi" di HP pengguna */
 @media (prefers-reduced-motion: reduce) {
-    .orn > img,
+    .orn > .orn-m > img,
     .petal {
         animation: none !important;
     }
