@@ -1,18 +1,27 @@
-/* ===== Wedding Wish ===== */
+/* ===== Wedding Wish =====
+   Disamakan dengan bagian lain: latar foto di-blur & digelapkan,
+   teks putih, kartu terang seperti kartu Hadiah / Kisah Cinta. */
 .section-wish {
-    --wish-bg: #ede4e0;
-    --wish-maroon: #561019;
-    --wish-maroon-soft: #7a2a36;
-    --wish-card: #dcc1b9;
-    --wish-input: #f6f4f3;
-    --wish-text: #3b3a36;
-    --wish-muted: #8c847d;
+    --wish-accent: #8a6a45;      /* cokelat keemasan */
+    --wish-card: rgba(255, 255, 255, 0.92);
+    --wish-card-text: #212529;
+    --wish-muted: #7d766f;
 
     position: relative;
-    background-color: var(--wish-bg);
-    color: var(--wish-text);
-    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    background: url('../assets/images/888.jpg') center center / cover no-repeat;
+    color: #ffffff;
     padding: 3rem 0 3.5rem;
+    overflow: clip;
+}
+
+/* Lapisan blur + gelap, sama seperti bagian lain */
+.section-wish::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    background: inherit;
+    filter: blur(2px) brightness(0.5);
+    z-index: 0;
 }
 
 .section-wish *,
@@ -22,11 +31,11 @@
 }
 
 .section-wish .wish-title {
-    color: var(--wish-maroon-soft);
-    font-size: 3rem;
+    color: #ffffff;
+    font-size: 2.25rem;
     text-align: center;
-    margin: 0 0 1.5rem;
-    line-height: 1.2;
+    margin: 0.5rem 0 1.5rem;
+    line-height: 1.3;
 }
 
 .section-wish .wish-wrap {
@@ -38,15 +47,16 @@
 .section-wish .wish-input {
     display: block;
     width: 100%;
-    background: var(--wish-input);
-    color: var(--wish-text);
-    border: 1px solid var(--wish-maroon);
-    border-radius: 1.5rem;
-    padding: 0.6rem 1.1rem;
-    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--wish-card-text);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 1rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.6rem;
     font-family: inherit;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     outline: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
     transition: box-shadow 0.2s ease;
 }
 
@@ -56,29 +66,29 @@
 }
 
 .section-wish .wish-input::placeholder {
-    color: #a39c97;
+    color: #8e8781;
 }
 
 .section-wish .wish-input:focus {
-    box-shadow: 0 0 0 0.2rem rgba(86, 16, 25, 0.15);
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.35);
 }
 
 .section-wish .wish-btn {
     display: block;
     width: 100%;
-    background: var(--wish-maroon);
-    color: #fff4e3;
+    background: #f8f9fa;
+    color: var(--wish-card-text);
     border: none;
-    border-radius: 1.5rem;
-    padding: 0.6rem 1rem;
+    border-radius: 1rem;
+    padding: 0.55rem 1rem;
     font-family: inherit;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: opacity 0.2s ease;
+    font-size: 0.95rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.15s ease, opacity 0.2s ease;
 }
 
 .section-wish .wish-btn:hover {
-    opacity: 0.9;
+    transform: translateY(-1px);
 }
 
 .section-wish .wish-btn:disabled {
@@ -95,27 +105,29 @@
 
 .section-wish .wish-alert {
     margin: 0.75rem 0 0;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-align: center;
 }
 
 .section-wish .wish-alert-error {
-    color: #a61b1b;
+    color: #ffc2c2;
 }
 
 .section-wish .wish-alert-success {
-    color: #2f6b3a;
+    color: #d8f5d0;
 }
 
 .section-wish .wish-list {
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
 }
 
 .section-wish .wish-card {
     background: var(--wish-card);
-    border-radius: 0.35rem;
-    padding: 0.75rem 0.6rem 0.6rem;
-    margin-bottom: 1rem;
+    color: var(--wish-card-text);
+    border-radius: 1rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.85rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .section-wish .wish-card-new {
@@ -123,23 +135,27 @@
 }
 
 .section-wish .wish-card-name {
-    color: var(--wish-maroon);
+    color: var(--wish-card-text);
     font-weight: 700;
-    font-size: 1.1rem;
-    margin: 0 0 0.35rem;
+    font-size: 0.95rem;
+    margin: 0 0 0.2rem;
     word-break: break-word;
+}
+
+.section-wish .wish-card-name .fa-check {
+    color: var(--wish-accent);
 }
 
 .section-wish .wish-card-time {
     color: var(--wish-muted);
-    font-size: 0.95rem;
-    margin: 0 0 0.35rem;
+    font-size: 0.75rem;
+    margin: 0 0 0.45rem;
 }
 
 .section-wish .wish-card-text {
-    color: var(--wish-text);
-    font-size: 1.05rem;
-    line-height: 1.75;
+    color: var(--wish-card-text);
+    font-size: 0.9rem;
+    line-height: 1.6;
     margin: 0;
     white-space: pre-line;
     word-break: break-word;
@@ -147,8 +163,8 @@
 
 .section-wish .wish-empty {
     text-align: center;
-    color: var(--wish-muted);
-    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
     margin: 1rem 0;
 }
 
@@ -156,13 +172,12 @@
     display: block;
     margin: 0.25rem auto 0;
     background: transparent;
-    color: var(--wish-maroon);
-    border: 1px solid var(--wish-maroon);
-    border-radius: 1.5rem;
-    padding: 0.35rem 1.25rem;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50rem;
+    padding: 0.3rem 1.25rem;
     font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.85rem;
 }
 
 @keyframes wish-pop {

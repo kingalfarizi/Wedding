@@ -122,7 +122,7 @@
 
         const label = button.innerHTML;
         button.disabled = true;
-        button.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Sending...';
+        button.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Mengirim...';
 
         try {
             // text/plain agar tidak memicu preflight CORS pada Apps Script.

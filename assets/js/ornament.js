@@ -72,9 +72,31 @@
         timer = setInterval(spawnPetal, PETAL_EVERY);
     };
 
+    // ---------- Sinkronkan posisi animasi scroll (AOS) ----------
+    // Tinggi halaman berubah setelah foto, video, dan daftar ucapan selesai dimuat.
+    // Tanpa refresh, AOS memakai posisi lama sehingga elemen telat muncul.
+    let refreshTimer = null;
+    const refreshAOS = () => {
+        clearTimeout(refreshTimer);
+        refreshTimer = setTimeout(() => window.AOS?.refresh(), 150);
+    };
+
+    if ('ResizeObserver' in window) {
+        const root = document.getElementById('root');
+        if (root) {
+            new ResizeObserver(refreshAOS).observe(root);
+        }
+    }
+    document.addEventListener('load', (e) => {
+        if (e.target instanceof HTMLImageElement || e.target instanceof HTMLVideoElement) {
+            refreshAOS();
+        }
+    }, true);
+
     // ---------- Saat undangan dibuka ----------
     document.addEventListener('undangan.open', () => {
         welcome?.classList.add('orn-exit');
         setTimeout(startPetals, 800);
+        setTimeout(refreshAOS, 400);
     });
 })();
