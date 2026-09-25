@@ -82,7 +82,7 @@ html[data-bs-theme="light"] .btn-transparent {
     object-fit: cover;
     z-index: 0;
     pointer-events: none;
-    background: #3a2e24 url('../assets/images/000.jpg') center / cover no-repeat;
+    background: #3a2e24 url('../assets/images/0000-poster.jpg') center / cover no-repeat;
 }
 
 #welcome > div {
