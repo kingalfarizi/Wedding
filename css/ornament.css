@@ -633,3 +633,105 @@
 @media (prefers-reduced-motion: reduce) {
     .date-hero::after { animation: none; display: none; }
 }
+
+/* =========================================================
+   ALAMAT ACARA (Moment Bahagia) — dibingkai agar menonjol
+   ========================================================= */
+.venue-card {
+    position: relative;
+    max-width: 330px;
+    margin: 1.25rem auto 0.75rem;
+    padding: 2.1rem 1.25rem 1.3rem;
+    border-radius: 1.25rem;
+    text-align: center;
+    color: #3b2f25;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
+        linear-gradient(135deg, #fbf4e6 0%, #efdcb8 55%, #e2c794 100%);
+    border: 1px solid rgba(255, 236, 200, 0.95);
+    box-shadow:
+        0 0.8rem 1.8rem rgba(0, 0, 0, 0.4),
+        0 0 0 6px rgba(226, 199, 148, 0.18);
+}
+
+/* bingkai garis tipis di dalam kartu */
+.venue-card::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(111, 78, 55, 0.35);
+    border-radius: 0.95rem;
+    pointer-events: none;
+}
+
+.venue-card p {
+    margin: 0;
+}
+
+.venue-pin {
+    position: absolute;
+    top: -1.35rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    font-size: 1.15rem;
+    color: #fff8ec;
+    background: linear-gradient(135deg, #8a6a45 0%, #6f4e37 100%);
+    box-shadow: 0 0.35rem 0.8rem rgba(0, 0, 0, 0.35), 0 0 0 4px #fbf4e6;
+    animation: venue-bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes venue-bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -5px); }
+}
+
+.venue-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8a6a45;
+}
+
+.venue-card .venue-name {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #6f4e37;
+    margin: 0.2rem 0 0.35rem;
+}
+
+.venue-address {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #3b2f25;
+}
+
+.venue-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50rem;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: #fff8ec;
+    background: linear-gradient(135deg, #8a6a45 0%, #6f4e37 100%);
+    box-shadow: 0 0.3rem 0.7rem rgba(80, 55, 30, 0.35);
+    transition: transform 0.15s ease;
+}
+
+.venue-btn:hover,
+.venue-btn:focus {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .venue-pin { animation: none; }
+}
