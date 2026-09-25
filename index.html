@@ -497,6 +497,26 @@
                             <p class="d-inline">Transfer</p>
 
                             <div class="d-flex justify-content-between align-items-center mt-2">
+                                <p class="m-0 p-0" style="font-size: 0.95rem;"><i class="fa-regular fa-user fa-sm me-1"></i>Dito Alfarizi</p>
+                                <button class="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0" style="font-size: 0.75rem;" data-bs-toggle="collapse" data-bs-target="#collapseTfDito"><i class="fa-solid fa-circle-info fa-sm me-1"></i>Info</button>
+                            </div>
+
+                            <div class="collapse" id="collapseTfDito">
+                                <hr class="my-2 py-1">
+                                <p class="m-0" style="font-size: 0.9rem;"><i class="fa-solid fa-building-columns me-1"></i>Bank Rakyat Indonesia</p>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <p class="m-0 p-0" style="font-size: 0.85rem;"><i class="fa-solid fa-credit-card me-1"></i>12345</p>
+                                    <!-- Ubah juga data-copy sesuai dengan no rekening -->
+                                    <button class="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0" style="font-size: 0.75rem;" data-copy="12345" onclick="undangan.util.copy(this)"><i class="fa-solid fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+                            <p class="d-inline">Transfer</p>
+
+                            <div class="d-flex justify-content-between align-items-center mt-2">
                                 <p class="m-0 p-0" style="font-size: 0.95rem;"><i class="fa-regular fa-user fa-sm me-1"></i>Nike Sri Maharani</p>
                                 <button class="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0" style="font-size: 0.75rem;" data-bs-toggle="collapse" data-bs-target="#collapseTf"><i class="fa-solid fa-circle-info fa-sm me-1"></i>Info</button>
                             </div>
@@ -517,14 +537,14 @@
                             <p class="d-inline">QRIS</p>
 
                             <div class="d-flex justify-content-between align-items-center mt-2">
-                                <p class="m-0 p-0" style="font-size: 0.95rem;"><i class="fa-regular fa-user fa-sm me-1"></i>Wedding Dito Nike</p>
+                                <p class="m-0 p-0" style="font-size: 0.95rem;"><i class="fa-regular fa-user fa-sm me-1"></i>Hadiah Dito &amp; Nike</p>
                                 <button class="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0" style="font-size: 0.75rem;" data-bs-toggle="collapse" data-bs-target="#collapseQris"><i class="fa-solid fa-circle-info fa-sm me-1"></i>Info</button>
                             </div>
 
                             <div class="collapse" id="collapseQris">
                                 <hr class="my-2 py-1">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/donate.png" alt="donate" class="img-fluid rounded-3 mx-auto bg-white">
+                                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/donate2.png" alt="donate" class="img-fluid rounded-3 mx-auto bg-white" style="width: 290px; max-width: 100%; height: auto;">
                                 </div>
                             </div>
                         </div>
@@ -547,7 +567,7 @@
                             <input type="text" id="wish-name" class="wish-input" placeholder="Nama" maxlength="50" autocomplete="name" aria-label="Nama">
                             <textarea id="wish-text" class="wish-input" rows="1" placeholder="Sampaikan Doa &amp; Ucapanmu" maxlength="1000" aria-label="Sampaikan Doa &amp; Ucapanmu"></textarea>
                             <input type="text" id="wish-website" class="wish-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-                            <button type="submit" id="wish-send" class="wish-btn"><i class="fa-solid fa-paper-plane me-2"></i>Kirim</button>
+                            <button type="submit" id="wish-send" class="wish-btn">Kirim</button>
                             <p id="wish-alert" class="wish-alert" role="status" hidden></p>
                         </form>
 
