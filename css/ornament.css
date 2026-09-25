@@ -494,9 +494,9 @@
 
 /* Ayat QS. Ar-Rum: 21 di bagian Mempelai */
 .couple-verse {
-    max-width: 340px;
+    max-width: 370px;
     margin: 2.5rem auto 0;
-    padding: 0 1.25rem;
+    padding: 0 0.75rem;
 }
 
 .couple-verse::before {
@@ -510,6 +510,7 @@
 
 .couple-verse-text {
     font-size: 0.9rem;
+    text-wrap: pretty; /* cegah satu kata tersisa sendirian di baris terakhir */
     font-style: italic;
     line-height: 1.75;
     margin: 0 0 0.6rem;

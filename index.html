@@ -71,7 +71,7 @@
 <!-- Jika tidak menggunakan komentar, hapus atribut data-key dan data-url, serta abaikan file dashboard.html. -->
 <!-- If you're not using comments, remove the data-key and data-url attributes, and ignore dashboard.html. -->
 
-<!-- Jika tidak menggunakan lagu, hapus atribut data-audio. -->
+<!-- Lagu latar diatur lewat atribut data-music (diputar oleh assets/js/music.js tanpa menunggu lagu terunduh penuh). -->
 <!-- If you're not using a song, remove the data-audio attribute. -->
 
 <!-- Ubah atribut time menjadi time-data (mengikuti format yang ditentukan). -->
@@ -88,7 +88,7 @@
 
 <!-- <html lang="id" data-bs-theme="auto"> ['auto', 'dark', 'light'] -->
 
-<body data-audio="./assets/music/2.m4a" data-confetti="true" data-time="2026-11-01 10:00:00">
+<body data-music="./assets/music/2.m4a" data-confetti="true" data-time="2026-11-01 10:00:00">
 
     <!-- Root Invitation -->
     <div class="row m-0 p-0 opacity-0" id="root">
@@ -104,12 +104,11 @@
                     <div class="orn orn-tr orn-flip-x" style="--w: 34%; --d: 6s; --delay: -2s;" data-aos="fade-down-left" data-aos-duration="1800" aria-hidden="true"><span class="orn-m"><img class="orn-pivot-tl" src="./assets/images/ornamen/corner-red-1.webp" alt=""></span></div>
                     <div class="orn orn-bl orn-flip-y" style="--w: 34%; --d: 5.5s; --delay: -1s;" data-aos="fade-up-right" data-aos-duration="1800" aria-hidden="true"><span class="orn-m"><img class="orn-pivot-tl" src="./assets/images/ornamen/corner-red-1.webp" alt=""></span></div>
                     <div class="orn orn-br orn-flip-x orn-flip-y" style="--w: 34%; --d: 4.5s; --delay: -3s;" data-aos="fade-up-left" data-aos-duration="1800" aria-hidden="true"><span class="orn-m"><img class="orn-pivot-tl" src="./assets/images/ornamen/corner-red-1.webp" alt=""></span></div>
-                    <img src="./assets/images/placeholder.webp" data-src="./assets/images/dn3.jpeg" alt="bg" class="position-absolute opacity-25 top-50 start-50 translate-middle bg-cover-home">
 
                     <div class="position-relative text-center pb-4">
                         <h1 class="font-esthetic home-title pt-5 pb-3 fw-medium"><span class="home-title-1">Undangan</span><span class="home-title-2">Pernikahan</span></h1>
 
-                        <img src="./assets/images/placeholder.webp" data-src="./assets/images/dn3.jpeg" alt="bg" onclick="undangan.guest.modal(this)" class="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer">
+                        <img src="./assets/images/placeholder.webp" data-src="./assets/images/dn3.webp" alt="bg" onclick="undangan.guest.modal(this)" class="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer">
 
                         <h2 class="font-esthetic mt-4 mb-2" style="font-size: 3.5rem; line-height: 1.1;">Dito &amp; Nike</h2>
                         <p class="my-2" style="font-size: 1.25rem;">1 November 2026</p>
@@ -122,7 +121,7 @@
                     <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
                         <img 
                             src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave0.jpg" 
+                            data-src="./assets/images/wave0.webp" 
                             alt="divider" 
                             class="img-fluid w-100" 
                             style="object-fit: cover; max-height: 400px;"
@@ -150,7 +149,7 @@
                             </div>
 
                             <div class="pb-1">
-                                <img data-src="./assets/images/dito2.png" alt="cowo" onclick="undangan.guest.modal(this)" class="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer">
+                                <img data-src="./assets/images/dito2.webp" alt="cowo" onclick="undangan.guest.modal(this)" class="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer">
                                 <h2 class="font-esthetic m-0" style="font-size: clamp(2.2rem, 10.5vw, 3rem);">Dito Alfarizi<span class="couple-degree">, S.Kom.</span></h2>
                                 <p class="couple-parent-label">Putra dari</p>
                                 <p class="couple-parent">Bapak Mardianto A.Md., S.E., M.M.<br>&amp; Ibu Sri Juliani</p>
@@ -175,7 +174,7 @@
                             </div>
 
                             <div class="pb-1">
-                                <img data-src="./assets/images/nike.png" alt="cewe" onclick="undangan.guest.modal(this)" class="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer">
+                                <img data-src="./assets/images/nike.webp" alt="cewe" onclick="undangan.guest.modal(this)" class="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer">
                                 <h2 class="font-esthetic m-0" style="font-size: clamp(2.2rem, 10.5vw, 3rem);">Nike Sri Maharani<span class="couple-degree">, A.Md.M.</span></h2>
                                 <p class="couple-parent-label">Putri dari</p>
                                 <p class="couple-parent">Bapak Suherman<br>&amp; Ibu Nurhasanah</p>
@@ -201,7 +200,7 @@
                     <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
                         <img 
                             src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave2.jpg" 
+                            data-src="./assets/images/wave2.webp" 
                             alt="divider" 
                             class="img-fluid w-100" 
                             style="object-fit: cover; max-height: 400px;"
@@ -275,7 +274,7 @@
                     <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
                         <img 
                             src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave5.jpg" 
+                            data-src="./assets/images/wave5.webp" 
                             alt="divider" 
                             class="img-fluid w-100" 
                             style="object-fit: cover; max-height: 400px;"
@@ -367,7 +366,7 @@
                     <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
                         <img 
                             src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave3.jpg" 
+                            data-src="./assets/images/wave3.webp" 
                             alt="divider" 
                             class="img-fluid w-100" 
                             style="object-fit: cover; max-height: 400px;"
@@ -394,13 +393,13 @@
 
                                 <div class="carousel-inner rounded-4">
                                     <div class="carousel-item active">
-                                        <img src="./assets/images/4.png" alt="image 1" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/4.webp" alt="image 1" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/5.png" alt="image 2" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/5.webp" alt="image 2" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/6.png" alt="image 3" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/6.webp" alt="image 3" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                 </div>
 
@@ -416,13 +415,13 @@
 
                                 <div class="carousel-inner rounded-4">
                                     <div class="carousel-item active">
-                                        <img src="./assets/images/7.png" alt="image 4" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/7.webp" alt="image 4" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/8.png" alt="image 5" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/8.webp" alt="image 5" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/9.png" alt="image 6" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/9.webp" alt="image 6" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                 </div>
 
@@ -439,13 +438,13 @@
 
                                 <div class="carousel-inner rounded-4">
                                     <div class="carousel-item active">
-                                        <img src="./assets/images/3.png" alt="image 7" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/3.webp" alt="image 7" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/10.png" alt="image 8" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/10.webp" alt="image 8" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/12.png" alt="image 9" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/12.webp" alt="image 9" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                 </div>
                             </div>
@@ -460,13 +459,13 @@
 
                                 <div class="carousel-inner rounded-4">
                                     <div class="carousel-item active">
-                                        <img src="./assets/images/13.png" alt="image 10" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/13.webp" alt="image 10" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/16.png" alt="image 11" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/16.webp" alt="image 11" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="./assets/images/15.png" alt="image 12" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
+                                        <img src="./assets/images/15.webp" alt="image 12" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                 </div>
                             </div>
@@ -479,7 +478,7 @@
                     <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
                         <img 
                             src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave4.jpg" 
+                            data-src="./assets/images/wave4.webp" 
                             alt="divider" 
                             class="img-fluid w-100" 
                             style="object-fit: cover; max-height: 400px;"
@@ -622,7 +621,7 @@
                     <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
                         <img 
                             src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave6.jpg" 
+                            data-src="./assets/images/wave6.webp" 
                             alt="divider" 
                             class="img-fluid w-100" 
                             style="object-fit: cover; max-height: 400px;"
@@ -652,7 +651,7 @@
                     <section class="section-divider text-center p-0 m-0 position-relative overflow-hidden">
                         <img 
                             src="./assets/images/placeholder.webp" 
-                            data-src="./assets/images/wave1.jpg" 
+                            data-src="./assets/images/wave1.webp" 
                             alt="divider" 
                             class="img-fluid w-100" 
                             style="object-fit: cover; max-height: 400px;"
@@ -713,7 +712,7 @@
         <div class="welcome-content d-flex flex-column text-center" style="color: white;">
             <h2 class="font-esthetic mb-4" style="font-size: 3rem; line-height: 1;">The Wedding</h2>
 
-            <img src="./assets/images/placeholder.webp" data-src="./assets/images/dn.png" alt="background" class="img-center-crop rounded-circle border border-3 border-light shadow mb-4 mx-auto">
+            <img src="./assets/images/placeholder.webp" data-src="./assets/images/dn.webp" alt="background" class="img-center-crop rounded-circle border border-3 border-light shadow mb-4 mx-auto">
 
             <h2 class="font-esthetic mb-4" style="font-size: 3.5rem; line-height: 1.1;">Dito &amp; Nike</h2>
             <div id="guest-name" data-message="Kepada Yth Bapak/Ibu/Saudara/i"></div>
@@ -800,6 +799,7 @@
     <script defer src="./assets/js/wish.js"></script>
     <script defer src="./assets/js/ornament.js"></script>
     <script defer src="./assets/js/gift.js"></script>
+    <script defer src="./assets/js/music.js"></script>
 </body>
 
 </html>

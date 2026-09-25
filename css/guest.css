@@ -163,42 +163,42 @@ svg {
 
 /* Home */
 .section-home {
-    background: url('../assets/images/111.jpg') center center/cover no-repeat;
+    background: url('../assets/images/111.webp') center center/cover no-repeat;
     position: relative;
 }
 
 /* Mempelai */
 .section-bride {
-    background: url('../assets/images/777.jpg') center center/cover no-repeat;
+    background: url('../assets/images/777.webp') center center/cover no-repeat;
     position: relative;
 }
 
 /* Love Story */
 .section-story {
-    background: url('../assets/images/444.jpg') center center/cover no-repeat;
+    background: url('../assets/images/444.webp') center center/cover no-repeat;
     position: relative;
 }
 
 /* Wedding Date */
 .section-date {
-    background: url('../assets/images/888.jpg') center center/cover no-repeat;
+    background: url('../assets/images/888.webp') center center/cover no-repeat;
     position: relative;
 }
 
 /* Gallery */
 .section-gallery {
-    background: url('../assets/images/555.jpg') center center/cover no-repeat;
+    background: url('../assets/images/555.webp') center center/cover no-repeat;
     position: relative;
 }
 
 /* Love Gift */
 .section-gift {
-    background: url('../assets/images/666.jpg') center center/cover no-repeat;
+    background: url('../assets/images/666.webp') center center/cover no-repeat;
     position: relative;
 }
 
 .section-foot {
-    background: url('../assets/images/999.jpg') center center/cover no-repeat;
+    background: url('../assets/images/999.webp') center center/cover no-repeat;
     position: relative;
 }
 
