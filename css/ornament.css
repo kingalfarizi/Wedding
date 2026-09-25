@@ -395,3 +395,73 @@
     transform: translateX(0.5em);
     margin-top: -0.1em;
 }
+
+/* =========================================================
+   BURUNG TERBANG
+   .bird       : bergerak di layar (diatur JS)
+   .bird-bob   : naik-turun halus saat terbang
+   .bird-dir   : dibalik saat burung berbalik arah
+   .wing       : sayap mengepak
+   ========================================================= */
+.bird-layer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: min(480px, 100%);
+    transform: translateX(-50%);
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1024;
+}
+
+.bird {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--size, 30px);
+    will-change: transform;
+}
+
+.bird-bob {
+    animation: bird-bob var(--bob, 1.6s) ease-in-out infinite alternate;
+}
+
+.bird-dir {
+    transition: transform 0.6s ease;
+}
+
+.bird-dir.to-left {
+    transform: scaleX(-1);
+}
+
+.bird svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    fill: #f7eee2;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+}
+
+.bird .wing {
+    transform-box: view-box;
+    transform-origin: 30px 17px;
+    animation: bird-flap var(--flap, 0.38s) ease-in-out infinite alternate;
+}
+
+@keyframes bird-flap {
+    from { transform: scaleY(1); }
+    to { transform: scaleY(-0.55); }
+}
+
+@keyframes bird-bob {
+    from { transform: translateY(-4px) rotate(-3deg); }
+    to { transform: translateY(4px) rotate(3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bird-layer {
+        display: none;
+    }
+}
