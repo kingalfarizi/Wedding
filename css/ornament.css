@@ -477,3 +477,48 @@
     fill: #111111;
     filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.15));
 }
+
+/* Bingkai bunga halaman pembukaan (frame-top & frame-bottom) */
+#welcome .orn-frame {
+    --max: none;
+}
+
+#welcome .orn-bottom.orn-frame {
+    --w: 100%;
+}
+
+.orn-js #welcome .orn-bottom { transform: translateY(60%); }
+/* Bingkai bawah sedikit diturunkan agar tidak menutupi isi halaman */
+#welcome.orn-play .orn-bottom { transform: translateY(18%); }
+#welcome.orn-exit .orn-bottom { transform: translateY(80%); }
+
+/* Ayat QS. Ar-Rum: 21 di bagian Mempelai */
+.couple-verse {
+    max-width: 340px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.25rem;
+}
+
+.couple-verse::before {
+    content: "";
+    display: block;
+    width: 4rem;
+    height: 1px;
+    margin: 0 auto 1.25rem;
+    background: linear-gradient(90deg, transparent, rgba(255, 236, 200, 0.9), transparent);
+}
+
+.couple-verse-text {
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.75;
+    margin: 0 0 0.6rem;
+}
+
+.couple-verse-src {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin: 0;
+}
