@@ -328,3 +328,8 @@
         transition: none;
     }
 }
+
+/* Halaman "Undangan Pernikahan": tanpa blur, hanya lapisan gelap */
+.section-home::before {
+    filter: brightness(0.5) !important;
+}
