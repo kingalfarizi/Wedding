@@ -244,6 +244,27 @@
         }
     }
 
+    // ---------- Bunga sudut: mekar saat bagiannya terlihat ----------
+    const blooms = document.querySelectorAll('.orn-bloom');
+    const startBlooms = () => {
+        if (!('IntersectionObserver' in window)) {
+            blooms.forEach((b) => b.classList.add('is-in'));
+            return;
+        }
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-in');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        blooms.forEach((b) => io.observe(b));
+    };
+    if (!welcome) {
+        startBlooms();
+    }
+
     // ---------- Saat undangan dibuka ----------
     document.addEventListener('undangan.open', () => {
         welcome?.classList.add('orn-exit');
@@ -251,6 +272,7 @@
         setTimeout(startPetals, 800);
         setTimeout(refreshAOS, 400);
         setTimeout(startDividers, 300);
+        setTimeout(startBlooms, 500);
         setTimeout(startBirds, 1500);
     });
 })();

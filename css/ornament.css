@@ -523,3 +523,113 @@
     opacity: 0.85;
     margin: 0;
 }
+
+/* =========================================================
+   BUNGA SUDUT: "Mekar Saat Muncul"
+   Bunga tumbuh dari kecil sambil berputar dari titik tempelnya
+   saat bagiannya terlihat, lalu bergoyang lembut.
+   Urutan: kiri atas -> kanan atas -> kiri bawah -> kanan bawah
+   ========================================================= */
+.orn-js .orn-bloom > .orn-m > img {
+    opacity: 0;
+    animation: none;
+}
+
+.orn-js .orn-bloom.is-in > .orn-m > img {
+    opacity: 1;
+    animation:
+        orn-bloom 1.6s cubic-bezier(.2, .9, .3, 1.3) var(--bdelay, 0s) both,
+        orn-sway var(--d, 5s) ease-in-out calc(var(--bdelay, 0s) + 1.6s) infinite alternate;
+}
+
+@keyframes orn-bloom {
+    from {
+        opacity: 0;
+        transform: scale(0.1) rotate(-35deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotate(calc(var(--amp, 3deg) * -1));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .orn-js .orn-bloom > .orn-m > img,
+    .orn-js .orn-bloom.is-in > .orn-m > img {
+        opacity: 1;
+        animation: none;
+    }
+}
+
+/* =========================================================
+   TANGGAL ACARA (Moment Bahagia) — ditonjolkan
+   Minggu | 01 | November 2026
+   ========================================================= */
+.date-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    max-width: 330px;
+    margin: 0 auto 1.6rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    color: #3b2f25;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
+        linear-gradient(135deg, #fbf4e6 0%, #efdcb8 55%, #e2c794 100%);
+    border: 1px solid rgba(255, 236, 200, 0.95);
+    box-shadow:
+        0 0.8rem 1.8rem rgba(0, 0, 0, 0.4),
+        0 0 0 6px rgba(226, 199, 148, 0.18);
+    overflow: hidden;
+}
+
+/* kilau cahaya yang menyapu kartu tanggal */
+.date-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.65) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: date-shine 4.5s ease-in-out 1.5s infinite;
+    pointer-events: none;
+}
+
+@keyframes date-shine {
+    0% { transform: translateX(-120%); }
+    40%, 100% { transform: translateX(120%); }
+}
+
+.date-hero-side {
+    flex: 1;
+    padding: 0.45rem 0;
+    border-top: 1px solid rgba(111, 78, 55, 0.55);
+    border-bottom: 1px solid rgba(111, 78, 55, 0.55);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: #6f4e37;
+}
+
+.date-hero-num {
+    font-size: 3.4rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #6f4e37;
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 360px) {
+    .date-hero { gap: 0.6rem; padding: 0.9rem 1rem; }
+    .date-hero-side { font-size: 0.72rem; letter-spacing: 0.16em; }
+    .date-hero-num { font-size: 2.9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .date-hero::after { animation: none; display: none; }
+}
