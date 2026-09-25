@@ -338,11 +338,12 @@
    MEMPELAI: gelar & nama orang tua
    ========================================================= */
 .couple-degree {
-    display: block;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.08em;
-    margin-top: -0.2rem;
+    font-family: 'Josefin Sans', sans-serif !important;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    margin-left: 0.1rem;
     opacity: 0.95;
 }
 
@@ -372,4 +373,25 @@
     max-width: 300px;
     margin: 0 auto;
     padding: 0 1rem;
+}
+
+/* Judul "Undangan / Pernikahan": dua baris bertingkat supaya ekor huruf
+   "g" tidak menabrak huruf "h" di baris bawah */
+.home-title {
+    font-size: 3.25rem;
+    line-height: 1.25;
+}
+
+.home-title-1,
+.home-title-2 {
+    display: block;
+}
+
+.home-title-1 {
+    transform: translateX(-0.9em);
+}
+
+.home-title-2 {
+    transform: translateX(0.5em);
+    margin-top: -0.1em;
 }
