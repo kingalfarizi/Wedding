@@ -333,3 +333,43 @@
 .section-home::before {
     filter: brightness(0.5) !important;
 }
+
+/* =========================================================
+   MEMPELAI: gelar & nama orang tua
+   ========================================================= */
+.couple-degree {
+    display: block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    margin-top: -0.2rem;
+    opacity: 0.95;
+}
+
+.couple-parent-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin: 1rem 0 0.4rem;
+}
+
+.couple-parent-label::before,
+.couple-parent-label::after {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 236, 200, 0.9), transparent);
+}
+
+.couple-parent {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
