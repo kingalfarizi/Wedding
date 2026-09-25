@@ -735,3 +735,26 @@
 @media (prefers-reduced-motion: reduce) {
     .venue-pin { animation: none; }
 }
+
+/* Kartu Akad & Resepsi — memakai gaya kartu alamat */
+.event-card {
+    margin-top: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.event-card .event-title {
+    font-size: 2.4rem;
+    line-height: 1.1;
+    color: #6f4e37;
+    margin: 0.15rem 0 0.4rem;
+}
+
+.event-card .event-time {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    border-radius: 50rem;
+    font-size: 0.88rem;
+    color: #3b2f25;
+    background: rgba(111, 78, 55, 0.1);
+    border: 1px solid rgba(111, 78, 55, 0.25);
+}

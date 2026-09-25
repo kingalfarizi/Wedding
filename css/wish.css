@@ -121,13 +121,29 @@
     margin-top: 1.5rem;
 }
 
+/* Kartu ucapan — gaya kartu gading-emas berbingkai, senada dengan kartu alamat */
 .section-wish .wish-card {
-    background: var(--wish-card);
-    color: var(--wish-card-text);
-    border-radius: 1rem;
-    padding: 0.85rem 1rem;
-    margin-bottom: 0.85rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    position: relative;
+    color: #3b2f25;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
+        linear-gradient(135deg, #fbf4e6 0%, #efdcb8 55%, #e2c794 100%);
+    border: 1px solid rgba(255, 236, 200, 0.95);
+    border-radius: 1.1rem;
+    padding: 1rem 1.2rem 1.05rem;
+    margin-bottom: 1rem;
+    box-shadow:
+        0 0.6rem 1.4rem rgba(0, 0, 0, 0.35),
+        0 0 0 5px rgba(226, 199, 148, 0.15);
+}
+
+.section-wish .wish-card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(111, 78, 55, 0.3);
+    border-radius: 0.85rem;
+    pointer-events: none;
 }
 
 /* Animasi kartu ucapan */
@@ -155,7 +171,7 @@
 }
 
 .section-wish .wish-card-name {
-    color: var(--wish-card-text);
+    color: #6f4e37;
     font-weight: 700;
     font-size: 0.95rem;
     margin: 0 0 0.2rem;
@@ -167,13 +183,13 @@
 }
 
 .section-wish .wish-card-time {
-    color: var(--wish-muted);
+    color: #8a6a45;
     font-size: 0.75rem;
     margin: 0 0 0.45rem;
 }
 
 .section-wish .wish-card-text {
-    color: var(--wish-card-text);
+    color: #3b2f25;
     font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;
