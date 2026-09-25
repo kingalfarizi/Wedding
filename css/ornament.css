@@ -465,3 +465,15 @@
         display: none;
     }
 }
+
+/* Burung hitam di halaman pembukaan: berada di atas video,
+   di bawah tulisan & tombol */
+#welcome .bird-layer-cover {
+    position: absolute;
+    z-index: 1;
+}
+
+.bird-layer-cover .bird svg {
+    fill: #111111;
+    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.15));
+}
