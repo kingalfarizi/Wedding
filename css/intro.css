@@ -1,0 +1,257 @@
+/* =========================================================
+   ANIMASI PEMBUKAAN (halaman cover)
+   Urutan (dimulai saat #welcome mendapat kelas .orn-play):
+   1. 0.0s  bunga sudut atas terlihat sangat dekat menutupi layar,
+            lalu mundur ke posisinya; video latar ikut "zoom out"
+   2. 1.2s  bunga bawah naik dari bawah layar
+   3. 2.6s  kartu bingkai krem muncul dari tengah
+   4. 3.4s  isi kartu muncul satu per satu
+   ========================================================= */
+
+#welcome {
+    --intro-ease: cubic-bezier(.22, .8, .25, 1);
+    --card-r: 34px;          /* jari-jari lekukan sudut kartu */
+    --card-line: #a8805a;    /* warna garis bingkai */
+    --card-bg: rgba(253, 248, 240, 0.88);
+}
+
+/* ---------- 1. Video latar: zoom out pelan ---------- */
+.orn-js #welcome .welcome-video {
+    transform: translateX(-50%) scale(1.35);
+}
+
+#welcome.orn-play .welcome-video {
+    transform: translateX(-50%) scale(1);
+    transition: transform 3.6s var(--intro-ease);
+}
+
+/* ---------- 1. Bunga sudut atas: dari sangat dekat ke posisinya ---------- */
+.orn-js #welcome .orn-tl,
+.orn-js #welcome .orn-tr {
+    opacity: 1;
+    filter: blur(3px);
+    transition: none;
+}
+
+.orn-js #welcome .orn-tl { transform: scale(4.2); transform-origin: top left; }
+.orn-js #welcome .orn-tr { transform: scale(6); transform-origin: top right; }
+
+#welcome.orn-play .orn-tl,
+#welcome.orn-play .orn-tr {
+    transform: scale(1);
+    filter: blur(0) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+    transition:
+        transform 2.6s var(--intro-ease),
+        filter 1.6s ease;
+    transition-delay: 0.15s !important;
+}
+
+/* ---------- 2. Bunga bawah: naik dari bawah ---------- */
+.orn-js #welcome .orn-bottom {
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+#welcome.orn-play .orn-bottom {
+    opacity: 1;
+    transform: translateY(18%);
+    transition:
+        transform 2s var(--intro-ease),
+        opacity 0.8s ease;
+    transition-delay: 1.2s !important;
+}
+
+/* ---------- 3. Kartu bingkai ---------- */
+#welcome .welcome-card {
+    position: relative;
+    z-index: 2;
+    width: min(82%, 380px);
+    min-height: min(80vh, 660px);
+    margin: 0 auto;
+    padding: 3.2rem 1.6rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0.8rem 1.6rem rgba(0, 0, 0, 0.35));
+}
+
+/* lapisan kartu: luar (krem), garis (cokelat), dalam (krem) */
+#welcome .welcome-card::before,
+#welcome .welcome-card::after,
+#welcome .welcome-card > .welcome-content::before {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    -webkit-mask-size: 51% 51%;
+    mask-size: 51% 51%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* Sudut melengkung ke dalam: setiap sudut dipotong lingkaran */
+#welcome .welcome-card::before {
+    inset: 0;
+    z-index: -3;
+    background: var(--card-bg);
+    --o: 0px;
+}
+
+#welcome .welcome-card::after {
+    inset: 9px;
+    z-index: -2;
+    background: var(--card-line);
+    --o: -9px;
+}
+
+#welcome .welcome-card > .welcome-content::before {
+    inset: 11px;
+    z-index: -1;
+    background: var(--card-bg);
+    --o: -11px;
+}
+
+#welcome .welcome-card::before,
+#welcome .welcome-card::after,
+#welcome .welcome-card > .welcome-content::before {
+    --rr: calc(var(--card-r) - var(--o));
+    -webkit-mask-image:
+        radial-gradient(circle at var(--o) var(--o), transparent var(--rr), #000 calc(var(--rr) + 0.5px)),
+        radial-gradient(circle at calc(100% - var(--o)) var(--o), transparent var(--rr), #000 calc(var(--rr) + 0.5px)),
+        radial-gradient(circle at var(--o) calc(100% - var(--o)), transparent var(--rr), #000 calc(var(--rr) + 0.5px)),
+        radial-gradient(circle at calc(100% - var(--o)) calc(100% - var(--o)), transparent var(--rr), #000 calc(var(--rr) + 0.5px));
+    mask-image:
+        radial-gradient(circle at var(--o) var(--o), transparent var(--rr), #000 calc(var(--rr) + 0.5px)),
+        radial-gradient(circle at calc(100% - var(--o)) var(--o), transparent var(--rr), #000 calc(var(--rr) + 0.5px)),
+        radial-gradient(circle at var(--o) calc(100% - var(--o)), transparent var(--rr), #000 calc(var(--rr) + 0.5px)),
+        radial-gradient(circle at calc(100% - var(--o)) calc(100% - var(--o)), transparent var(--rr), #000 calc(var(--rr) + 0.5px));
+    -webkit-mask-position: top left, top right, bottom left, bottom right;
+    mask-position: top left, top right, bottom left, bottom right;
+}
+
+/* isi kartu memakai seluruh lebar, lapisan dalam diposisikan terhadap kartu */
+#welcome .welcome-card > .welcome-content {
+    position: static;
+    z-index: auto;
+    width: 100%;
+    color: #6f4e37 !important;
+}
+
+/* Kartu muncul dari tengah */
+.orn-js #welcome .welcome-card {
+    opacity: 0;
+    transform: scale(1.18);
+}
+
+#welcome.orn-play .welcome-card {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+        opacity 1.2s ease 2.6s,
+        transform 1.6s var(--intro-ease) 2.6s;
+}
+
+/* ---------- 4. Isi kartu ---------- */
+#welcome .welcome-content .font-esthetic {
+    color: #6f4e37;
+}
+
+#welcome .welcome-content h2:first-child {
+    color: #8a6a45;
+}
+
+#welcome .welcome-photo {
+    width: 10.5rem;
+    height: 10.5rem;
+    border-color: #fbf4e6 !important;
+    box-shadow: 0 0 0 1px var(--card-line), 0 0.5rem 1rem rgba(80, 55, 30, 0.25) !important;
+}
+
+#welcome .welcome-date {
+    margin: 0 0 0.9rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    color: #8a6a45;
+}
+
+/* nama tamu: tanpa kartu tambahan, cukup garis tipis atas-bawah */
+#welcome #guest-name > div {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-top: 1px solid rgba(168, 128, 90, 0.45);
+    border-bottom: 1px solid rgba(168, 128, 90, 0.45);
+    border-radius: 0;
+    padding: 0.55rem 0.5rem 0.6rem;
+}
+
+#welcome #guest-name > div::before,
+#welcome #guest-name > div::after {
+    display: none;
+}
+
+/* tombol Buka Undangan bernuansa cokelat-emas */
+#welcome .welcome-content .btn {
+    border: none;
+    color: #fff8ec;
+    background: linear-gradient(135deg, #a8805a 0%, #6f4e37 100%);
+    box-shadow: 0 0.4rem 0.9rem rgba(80, 55, 30, 0.35) !important;
+}
+
+#welcome.orn-play .welcome-content > *:nth-child(1) { animation-delay: 3.3s; }
+#welcome.orn-play .welcome-content > *:nth-child(2) { animation-delay: 3.6s; }
+#welcome.orn-play .welcome-content > *:nth-child(3) { animation-delay: 3.9s; }
+#welcome.orn-play .welcome-content > *:nth-child(4) { animation-delay: 4.15s; }
+#welcome.orn-play .welcome-content > *:nth-child(5) { animation-delay: 4.4s; }
+#welcome.orn-play .welcome-content > *:nth-child(6) { animation-delay: 4.7s; }
+
+/* Burung muncul di atas pemandangan, di belakang kartu */
+#welcome .bird-layer-cover {
+    z-index: 1;
+}
+
+/* ---------- Saat undangan dibuka ---------- */
+#welcome.orn-exit .welcome-card {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.7s ease, transform 0.9s ease;
+}
+
+#welcome.orn-exit .orn-tl,
+#welcome.orn-exit .orn-tr {
+    transition: transform 0.9s ease, opacity 0.9s ease;
+    transition-delay: 0s !important;
+}
+
+#welcome.orn-exit .orn-tl { transform: translate(-80%, -60%); }
+#welcome.orn-exit .orn-tr { transform: translate(80%, -60%); }
+
+#welcome.orn-exit .orn-bottom {
+    transform: translateY(80%);
+    transition: transform 0.9s ease, opacity 0.9s ease;
+    transition-delay: 0s !important;
+}
+
+/* layar pendek: perkecil isi agar muat */
+@media (max-height: 700px) {
+    #welcome .welcome-card { padding: 2.4rem 1.4rem 2.2rem; min-height: auto; }
+    #welcome .welcome-photo { width: 8.5rem; height: 8.5rem; }
+    #welcome .welcome-content h2:first-child { font-size: 2.4rem !important; }
+    #welcome .welcome-content h2:nth-of-type(2) { font-size: 2.9rem !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .orn-js #welcome .welcome-video,
+    .orn-js #welcome .orn-tl,
+    .orn-js #welcome .orn-tr,
+    .orn-js #welcome .orn-bottom,
+    .orn-js #welcome .welcome-card {
+        transition: none !important;
+        filter: none;
+        opacity: 1;
+    }
+    .orn-js #welcome .welcome-video { transform: translateX(-50%); }
+    .orn-js #welcome .orn-tl,
+    .orn-js #welcome .orn-tr,
+    .orn-js #welcome .welcome-card { transform: none; }
+    .orn-js #welcome .orn-bottom { transform: translateY(18%); }
+}

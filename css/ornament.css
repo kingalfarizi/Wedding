@@ -471,6 +471,7 @@
 #welcome .bird-layer-cover {
     position: absolute;
     z-index: 1;
+    opacity: 0.8;   /* burung halaman pembuka terlihat 80% */
 }
 
 .bird-layer-cover .bird svg {

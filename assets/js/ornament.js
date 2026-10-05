@@ -12,18 +12,22 @@
 
     // ---------- Cover ----------
     if (welcome) {
+        // Animasi pembuka baru diputar setelah layar loading benar-benar hilang,
+        // supaya urutan animasinya terlihat dari awal.
+        const ready = () => parseFloat(welcome.style.opacity || '0') > 0 && !document.getElementById('loading');
         const play = () => welcome.classList.add('orn-play');
 
-        if (parseFloat(welcome.style.opacity || '0') > 0) {
+        if (ready()) {
             play();
         } else {
             const obs = new MutationObserver(() => {
-                if (parseFloat(welcome.style.opacity || '0') > 0) {
+                if (ready()) {
                     play();
                     obs.disconnect();
                 }
             });
             obs.observe(welcome, { attributes: true, attributeFilter: ['style'] });
+            obs.observe(document.body, { childList: true, subtree: true });
         }
     }
 
