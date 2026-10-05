@@ -780,3 +780,65 @@
 @media (prefers-reduced-motion: reduce) {
     .card-shine::after { animation: none; display: none; }
 }
+
+/* =========================================================
+   NAMA TAMU di halaman pembuka (diisi otomatis dari link ?to=Nama)
+   ========================================================= */
+#guest-name:empty { display: none; }
+
+#guest-name > div {
+    position: relative;
+    margin: 0 auto !important;
+    width: fit-content;
+    min-width: 230px;
+    max-width: min(340px, 88vw);
+    padding: 0.7rem 1.4rem 0.8rem;
+    color: #3b2f25;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
+        linear-gradient(135deg, #fbf4e6 0%, #efdcb8 55%, #e2c794 100%);
+    border: 1px solid rgba(255, 236, 200, 0.95);
+    border-radius: 1rem;
+    box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.35), 0 0 0 5px rgba(226, 199, 148, 0.15);
+    overflow: hidden;
+}
+
+#guest-name > div::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(111, 78, 55, 0.3);
+    border-radius: 0.75rem;
+    pointer-events: none;
+}
+
+/* kilau emas melintas, sama seperti kartu tanggal */
+#guest-name > div::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.65) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: date-shine 4.5s ease-in-out 2s infinite;
+    pointer-events: none;
+}
+
+#guest-name small {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: #8a6a45;
+}
+
+#guest-name p {
+    font-weight: 600;
+    font-size: 1.2rem !important;
+    line-height: 1.3;
+    color: #6f4e37;
+    word-break: break-word;
+    text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #guest-name > div::after { display: none; }
+}
