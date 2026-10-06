@@ -249,7 +249,7 @@
     }
 
     // ---------- Bunga sudut: mekar saat bagiannya terlihat ----------
-    const blooms = document.querySelectorAll('.orn-bloom');
+    const blooms = document.querySelectorAll('.orn-bloom, .wreath-anim');
     const startBlooms = () => {
         if (!('IntersectionObserver' in window)) {
             blooms.forEach((b) => b.classList.add('is-in'));
