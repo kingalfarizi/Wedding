@@ -111,6 +111,78 @@
         more.hidden = wishes.length <= shown;
     };
 
+    /**
+     * Konfeti saat ucapan berhasil dikirim (memakai pustaka konfeti yang sama
+     * dengan tombol "Buka Undangan"): letupan dari tombol Kirim + hati berjatuhan.
+     * @param {HTMLElement} from
+     */
+    // Pustaka konfeti tidak lagi dimuat oleh template (konfeti "Buka Undangan" dimatikan),
+    // jadi dimuat sendiri di sini hanya saat tamu mengirim ucapan.
+    let confettiLoading = null;
+    const loadConfetti = () => {
+        if (window.confetti) {
+            return Promise.resolve(window.confetti);
+        }
+        if (!confettiLoading) {
+            confettiLoading = new Promise((resolve) => {
+                const sc = document.createElement('script');
+                sc.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.js';
+                sc.async = true;
+                sc.onload = () => resolve(window.confetti || null);
+                sc.onerror = () => resolve(null);
+                document.head.appendChild(sc);
+            });
+        }
+        return confettiLoading;
+    };
+
+    const celebrate = async (from) => {
+        const confetti = await loadConfetti();
+        if (!confetti || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
+        const zIndex = 1057;
+        const rect = from.getBoundingClientRect();
+        const origin = {
+            x: (rect.left + rect.width / 2) / window.innerWidth,
+            y: (rect.top + rect.height / 2) / window.innerHeight,
+        };
+        const gold = ['#e2c794', '#f3dc9f', '#c9a24f', '#fbf4e6', '#d07a4f'];
+
+        // letupan dari tombol Kirim
+        confetti({ particleCount: 70, spread: 75, startVelocity: 38, origin, colors: gold, zIndex });
+        setTimeout(() => confetti({ particleCount: 45, spread: 110, startVelocity: 28, origin, colors: gold, scalar: 0.8, zIndex }), 220);
+
+        // hati pink berjatuhan sebentar
+        const heart = confetti.shapeFromPath ? confetti.shapeFromPath({
+            path: 'M167 72c19,-38 37,-56 75,-56 42,0 76,33 76,75 0,76 -76,151 -151,227 -76,-76 -151,-151 -151,-227 0,-42 33,-75 75,-75 38,0 57,18 76,56z',
+            matrix: [0.0333, 0, 0, 0.0333, -5.57, -5.53],
+        }) : null;
+        const end = Date.now() + 2500;
+        const frame = () => {
+            ['#FFC0CB', '#FF1493', '#C71585'].forEach((color) => {
+                confetti({
+                    particleCount: 1,
+                    startVelocity: 0,
+                    ticks: 90,
+                    origin: { x: Math.random(), y: Math.random() * 0.3 },
+                    colors: [color],
+                    shapes: heart ? [heart] : undefined,
+                    gravity: 0.6 + Math.random() * 0.4,
+                    drift: Math.random() - 0.5,
+                    scalar: 0.6 + Math.random() * 0.5,
+                    zIndex,
+                });
+            });
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        };
+        requestAnimationFrame(frame);
+    };
+
+
     const load = async () => {
         if (!url) {
             list.innerHTML = '<p class="wish-empty">Wedding Wish belum terhubung ke Google Sheets.</p>';
@@ -152,6 +224,7 @@
 
         const label = button.innerHTML;
         button.disabled = true;
+        loadConfetti(); // mulai muat konfeti sambil menunggu ucapan terkirim
         button.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Mengirim...';
 
         try {
@@ -186,6 +259,7 @@
 
             inputWish.value = '';
             showAlert('Terima kasih atas ucapan dan doanya!', 'success');
+            celebrate(button);
         } catch (err) {
             showAlert(err.message && err.message !== 'Failed to fetch' ? err.message : 'Gagal mengirim ucapan. Periksa koneksi internet Anda.');
         } finally {
