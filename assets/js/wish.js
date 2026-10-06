@@ -137,13 +137,14 @@
     };
 
     const celebrate = async (from) => {
+        // posisi tombol dicatat dulu, karena tombol bisa hilang (mis. tombol "Lihat")
+        const rect = from.getBoundingClientRect();
         const confetti = await loadConfetti();
         if (!confetti || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             return;
         }
 
         const zIndex = 1057;
-        const rect = from.getBoundingClientRect();
         const origin = {
             x: (rect.left + rect.width / 2) / window.innerWidth,
             y: (rect.top + rect.height / 2) / window.innerHeight,
@@ -268,15 +269,30 @@
         }
     };
 
-    // Isi nama otomatis dari link undangan (?to=Nama).
+    // Isi nama otomatis dari link undangan (?to=Nama) dan kunci kolomnya,
+    // supaya nama pengirim selalu sama dengan nama tamu di halaman depan.
+    // Kalau undangan dibuka tanpa ?to=, kolom nama tetap bisa diisi.
     const raw = window.location.search.split('to=');
     if (raw.length > 1 && raw[1]) {
         try {
-            inputName.value = decodeURIComponent(raw[1].replace(/\+/g, ' ')).slice(0, 50);
+            const guest = decodeURIComponent(raw[1].replace(/\+/g, ' ')).trim().slice(0, 50);
+            if (guest) {
+                inputName.value = guest;
+                inputName.readOnly = true;
+                inputName.classList.add('wish-input-locked');
+                inputName.setAttribute('aria-readonly', 'true');
+                inputName.title = 'Nama sesuai undangan';
+            }
         } catch {
             // abaikan
         }
     }
+
+    // Konfeti juga saat menekan "Lihat" di Kisah Cinta
+    // (tombol bawaan template, konfetinya dulu ikut dimatikan bersama konfeti "Buka Undangan").
+    document.querySelectorAll('[onclick*="showStory"]').forEach((btn) => {
+        btn.addEventListener('click', () => celebrate(btn));
+    });
 
     // "Lihat ucapan lainnya": hanya kartu baru yang ditambahkan & dianimasikan.
     more.addEventListener('click', () => {

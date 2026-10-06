@@ -241,3 +241,20 @@
         animation: none;
     }
 }
+
+/* Nama pengirim terkunci (otomatis dari link undangan ?to=Nama) */
+.section-wish .wish-input.wish-input-locked {
+    background: rgba(251, 244, 230, 0.75);
+    color: #6f4e37;
+    font-weight: 600;
+    cursor: not-allowed;
+    padding-right: 2.4rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238a6a45'%3E%3Cpath d='M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2zm-7-2a2 2 0 0 1 4 0v2h-4V7zm3 9.7V18h-2v-1.3a2 2 0 1 1 2 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 1rem;
+}
+
+.section-wish .wish-input.wish-input-locked:focus {
+    box-shadow: none;
+}
