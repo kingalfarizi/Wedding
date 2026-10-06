@@ -154,31 +154,65 @@
     color: var(--card-text);
 }
 
-/* nama tamu: tanpa kartu & tanpa garis */
+/* nama tamu: kartu gading-emas, sama seperti kartu tanggal "Minggu 1 November 2026" */
 #welcome #guest-name > div {
-    background: none;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    padding: 0.4rem 0.5rem;
+    position: relative;
+    overflow: hidden;
+    width: fit-content;
+    min-width: 240px;
+    max-width: min(340px, 88vw);
+    margin: 0 auto !important;
+    padding: 0.75rem 1.5rem 0.85rem;
+    border-radius: 1.25rem;
+    color: #3b2f25;
+    text-shadow: none;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
+        linear-gradient(135deg, #fbf4e6 0%, #efdcb8 55%, #e2c794 100%);
+    border: 1px solid rgba(255, 236, 200, 0.95);
+    box-shadow:
+        0 0.8rem 1.8rem rgba(0, 0, 0, 0.4),
+        0 0 0 6px rgba(226, 199, 148, 0.18);
 }
 
-#welcome #guest-name small,
+#welcome #guest-name small {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: #8a6a45;
+}
+
 #welcome #guest-name p {
-    color: var(--card-text);
+    font-weight: 600;
+    font-size: 1.2rem !important;
+    line-height: 1.3;
+    color: #6f4e37;
+    text-wrap: balance;
 }
 
-#welcome #guest-name > div::before,
-#welcome #guest-name > div::after {
+/* tanpa garis bingkai dalam, tapi tetap ada kilau emas melintas */
+#welcome #guest-name > div::before {
     display: none;
 }
 
-/* tombol Buka Undangan bernuansa cokelat-emas */
+#welcome #guest-name > div::after {
+    display: block;
+}
+
+/* tombol Buka Undangan: emas metalik */
 #welcome .welcome-content .btn {
     border: none;
-    color: #fff8ec;
-    background: linear-gradient(135deg, #a8805a 0%, #6f4e37 100%);
+    color: #3b2f25;
+    font-weight: 600;
+    text-shadow: none;
+    background: linear-gradient(135deg, #f3dc9f 0%, #c9a24f 50%, #f0d68f 100%);
     box-shadow: 0 0.4rem 0.9rem rgba(0, 0, 0, 0.35) !important;
+}
+
+#welcome .welcome-content .btn:hover,
+#welcome .welcome-content .btn:focus {
+    color: #3b2f25;
+    filter: brightness(1.06);
 }
 
 #welcome.orn-play .welcome-content > *:nth-child(1) { animation-delay: 1.8s; }

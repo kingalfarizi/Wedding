@@ -887,22 +887,26 @@
     to { transform: scale(1.03) rotate(1.5deg); }
 }
 
-/* ---------- Bingkai setengah lingkaran (foto mempelai) ---------- */
+/* ---------- Bingkai foto mempelai (wreath-groom / wreath-bride) ----------
+   Kedua gambar sudah dibuat persegi dengan pusat lingkaran di tengah.
+   groom: jari-jari dalam ±27% lebar gambar, bride: ±24% */
 .photo-wreath-half {
-    width: min(16rem, 70vw);
-    margin: 1.5rem auto 1rem;
+    margin: 0.5rem auto 0.5rem;
 }
 
 .photo-wreath-half .photo-wreath-photo {
     left: 50%;
-    top: 47%;
-    width: 70% !important;
+    top: 50%;
     border: 2px solid #e2c794;
 }
 
+.photo-wreath-groom { width: min(18.5rem, 86vw); }
+.photo-wreath-groom .photo-wreath-photo { width: 52.5% !important; }
+
+.photo-wreath-bride { width: min(20.5rem, 92vw); }
+.photo-wreath-bride .photo-wreath-photo { width: 46.5% !important; }
+
 .photo-wreath-half .photo-wreath-frame {
-    clip-path: inset(48% 0 0 0);
-    transform-origin: 50% 70%;
     animation-name: wreath-sway;
 }
 
@@ -948,7 +952,7 @@
 }
 
 @keyframes wreath-rise {
-    from { opacity: 0; transform: translateY(18%) scale(0.7) rotate(-2deg); }
+    from { opacity: 0; transform: scale(0.7) rotate(-25deg); }
     to { opacity: 1; transform: rotate(-2deg); }
 }
 
