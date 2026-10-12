@@ -291,3 +291,52 @@ body::-webkit-scrollbar,
 *::-webkit-scrollbar {
     display: none !important;
 }
+
+/* ===== Video Kisah Cinta: bar kontrol tidak statis (muncul saat disentuh/hover) ===== */
+.love-videos .love-video-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tanpa slider volume: hanya ikon mute/unmute */
+.love-videos .love-video-wrap .lv-vol {
+    display: none !important;
+}
+
+.love-videos .love-video-wrap .lv-bar {
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 !important;
+    padding: 1.75rem 0.6rem 0.5rem !important;
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0)) !important;
+    opacity: 0 !important;
+    transform: translateY(6px);
+    pointer-events: none !important;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.love-videos .love-video-wrap .lv-bar .lv-seek {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Tampil: saat disentuh, di-hover (desktop), atau video sedang di-pause */
+.love-videos .love-video-wrap.lv-show .lv-bar {
+    opacity: 1 !important;
+    transform: none;
+    pointer-events: auto !important;
+}
+
+@media (hover: hover) {
+    .love-videos .love-video-wrap:hover .lv-bar {
+        opacity: 1 !important;
+        transform: none;
+        pointer-events: auto !important;
+    }
+}

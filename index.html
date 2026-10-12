@@ -229,7 +229,7 @@
                         <div class="bg-theme-auto rounded-5 shadow p-3">
                             <h2 class="font-esthetic text-center py-2 mb-2" style="font-size: 2.125rem;">Kisah Cinta</h2>
 
-                            <!-- Video Kisah Cinta (2 bagian) dengan bar kontrol sendiri: play/pause, geser waktu, mute & volume (tanpa fullscreen). Diatur oleh assets/js/love-video.js -->
+                            <!-- Video Kisah Cinta (2 bagian) dengan bar kontrol sendiri: play/pause, geser waktu, mute/unmute (tanpa slider volume & fullscreen; bar muncul saat disentuh). Diatur oleh assets/js/love-video.js -->
                             <div class="love-videos">
                                 <div class="love-video-wrap">
                                     <video class="love-video" src="./assets/video/kisah-cinta-1.mp4" poster="./assets/video/kisah-cinta-1-poster.jpg" muted loop playsinline disablepictureinpicture preload="none" aria-label="Video kisah cinta 1"></video>
@@ -238,7 +238,6 @@
                                         <input type="range" class="lv-seek" min="0" max="1000" step="1" value="0" aria-label="Geser waktu video">
                                         <span class="lv-time">0:00</span>
                                         <button type="button" class="lv-btn lv-mute" aria-label="Nyalakan suara video"><i class="fa-solid fa-volume-xmark"></i></button>
-                                        <input type="range" class="lv-vol" min="0" max="1" step="0.05" value="1" aria-label="Volume video">
                                     </div>
                                 </div>
                                 <div class="love-video-wrap">
@@ -248,7 +247,6 @@
                                         <input type="range" class="lv-seek" min="0" max="1000" step="1" value="0" aria-label="Geser waktu video">
                                         <span class="lv-time">0:00</span>
                                         <button type="button" class="lv-btn lv-mute" aria-label="Nyalakan suara video"><i class="fa-solid fa-volume-xmark"></i></button>
-                                        <input type="range" class="lv-vol" min="0" max="1" step="0.05" value="1" aria-label="Volume video">
                                     </div>
                                 </div>
                             </div>
