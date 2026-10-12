@@ -1,10 +1,12 @@
 /**
  * VIDEO KISAH CINTA (2 bagian, dengan suaranya sendiri)
- * - Hanya satu video yang diputar: yang paling terlihat di layar.
- * - Saat video bersuara diputar, musik latar website dijeda; saat video
- *   berhenti (di-scroll lewat / suara dimatikan), musik latar lanjut lagi.
- * - Kalau browser tidak mengizinkan video langsung bersuara, video tetap
- *   diputar tanpa suara dan tamu bisa mengetuk tombol speaker.
+ * - Kedua video berputar otomatis (autoplay) selama terlihat di layar.
+ * - Hanya SATU video yang bersuara. Awalnya suara mengikuti video yang paling
+ *   terlihat; tamu bisa memilih sendiri lewat tombol speaker di tiap video.
+ * - Saat ada video bersuara, musik latar website dijeda; saat tidak ada
+ *   (di-scroll lewat / suara dimatikan), musik latar lanjut lagi.
+ * - Kalau browser menolak video langsung bersuara, video tetap berputar tanpa
+ *   suara dan tombol speaker berdenyut agar tamu mengetuknya.
  * - Video baru diunduh saat bagian Kisah Cinta hampir terlihat.
  */
 (() => {
@@ -19,9 +21,14 @@
     }
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let opened = false;     // setelah "Buka Undangan"
-    let userMuted = false;  // tamu sengaja mematikan suara video
-    let active = null;
+    const VISIBLE = 0.2;   // video diputar bila minimal 20% terlihat
+    const FOCUS = 0.5;     // suara otomatis ke video yang ≥50% terlihat
+
+    let opened = false;    // setelah "Buka Undangan"
+    let manual = false;    // tamu sudah memilih sendiri lewat tombol speaker
+    let silent = false;    // tamu memilih semua video tanpa suara
+    let chosen = null;     // video yang dipilih tamu
+    let owner = null;      // video yang sedang bersuara
     let holding = false;
 
     const hold = () => {
@@ -37,8 +44,7 @@
         }
     };
     const syncMusic = () => {
-        const audible = active && !active.v.paused && !active.v.muted;
-        if (audible) {
+        if (owner && !owner.v.paused && !owner.v.muted) {
             hold();
         } else {
             release();
@@ -46,108 +52,121 @@
     };
 
     const icon = (it) => {
-        const on = !it.v.muted;
+        const on = !it.v.muted && !it.v.paused;
         it.b.innerHTML = on ? '<i class="fa-solid fa-volume-high"></i>' : '<i class="fa-solid fa-volume-xmark"></i>';
-        it.b.setAttribute('aria-label', on ? 'Matikan suara video' : 'Nyalakan suara video');
+        it.b.setAttribute('aria-label', on ? 'Matikan suara video ini' : 'Dengarkan suara video ini');
         it.w.classList.toggle('is-muted', !on);
+        it.w.classList.toggle('is-audible', on);
     };
 
-    const start = (it) => {
-        items.forEach((o) => {
-            if (o !== it) {
-                o.v.pause();
-            }
-        });
-        active = it;
-        it.v.preload = 'auto';
-        it.v.muted = userMuted;
-        icon(it);
-        const p = it.v.play();
-        if (p && p.catch) {
-            p.catch(() => {
-                // browser menolak video bersuara tanpa ketukan: putar tanpa suara
-                it.v.muted = true;
-                icon(it);
-                it.v.play().catch(() => {});
-                syncMusic();
-            });
+    // tentukan video mana yang bersuara
+    const pickOwner = () => {
+        if (silent) {
+            return null;
         }
-    };
-
-    const stopAll = () => {
-        items.forEach((o) => o.v.pause());
-        active = null;
-        syncMusic();
-    };
-
-    const evaluate = () => {
-        if (!opened || document.hidden) {
-            return;
+        if (manual) {
+            return chosen && chosen.ratio >= VISIBLE ? chosen : null;
         }
         let best = null;
         items.forEach((it) => {
-            if (it.ratio >= 0.5 && (!best || it.ratio > best.ratio)) {
+            if (it.ratio >= FOCUS && (!best || it.ratio > best.ratio)) {
                 best = it;
             }
         });
-        if (!best) {
-            stopAll();
-        } else if (best !== active || best.v.paused) {
-            if (reduce && best !== active) {
-                items.forEach((o) => o.v.pause());
-                active = best;
-                syncMusic();
-                return;
-            }
-            if (!reduce) {
-                start(best);
-            }
+        return best;
+    };
+
+    const apply = () => {
+        if (!opened || document.hidden) {
+            return;
         }
+        owner = pickOwner();
+
+        items.forEach((it) => {
+            const shouldPlay = it.ratio >= VISIBLE && !reduce;
+            const loud = it === owner;
+
+            if (!loud) {
+                it.v.muted = true;
+            }
+
+            if (!shouldPlay && !loud) {
+                it.v.pause();
+            } else if (it.v.paused || (loud && it.v.muted)) {
+                it.v.preload = 'auto';
+                it.v.muted = !loud;
+                const p = it.v.play();
+                if (p && p.catch) {
+                    p.catch(() => {
+                        // video bersuara ditolak browser: putar tanpa suara
+                        if (loud) {
+                            it.w.classList.add('needs-tap');
+                            it.v.muted = true;
+                            if (owner === it) {
+                                owner = null;
+                            }
+                            it.v.play().catch(() => {});
+                            syncMusic();
+                        }
+                        icon(it);
+                    });
+                }
+            }
+            icon(it);
+        });
+        syncMusic();
     };
 
     items.forEach((it) => {
         it.v.addEventListener('loadeddata', () => it.v.classList.add('is-ready'), { once: true });
         ['play', 'pause', 'volumechange'].forEach((ev) => it.v.addEventListener(ev, () => {
             icon(it);
-            if (it === active) {
-                syncMusic();
-            }
+            syncMusic();
         }));
 
-        // tombol speaker (dan ketuk video) = nyalakan / matikan suara
+        // tombol speaker (atau ketuk video): pilih suara video ini / matikan
         const toggle = () => {
-            if (it.v.muted) {
-                userMuted = false;
+            manual = true;
+            items.forEach((o) => o.w.classList.remove('needs-tap'));
+            if (it === owner && !it.v.muted) {
+                silent = true;
+                chosen = null;
+                it.v.muted = true;
+                owner = null;
+            } else {
+                silent = false;
+                chosen = it;
+                // dijalankan langsung di dalam ketukan supaya diizinkan browser (iPhone)
                 items.forEach((o) => {
                     if (o !== it) {
-                        o.v.pause();
+                        o.v.muted = true;
                     }
                 });
-                active = it;
                 it.v.muted = false;
-                if (it.v.paused) {
-                    it.v.play().catch(() => {});
-                }
-            } else {
-                userMuted = true;
-                it.v.muted = true;
+                owner = it;
+                it.v.play().catch(() => {});
             }
-            icon(it);
-            syncMusic();
+            apply();
         };
-        it.b.addEventListener('click', toggle);
+        it.b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggle();
+        });
         it.v.addEventListener('click', toggle);
         icon(it);
     });
 
-    // tamu menyalakan musik latar lewat tombol musik: suara video dimatikan
+    // tamu menyalakan musik latar lewat tombol musik: semua video tanpa suara
     document.addEventListener('undangan.music.user-play', () => {
-        userMuted = true;
+        manual = true;
+        silent = true;
+        chosen = null;
+        owner = null;
+        holding = false;
         items.forEach((o) => {
             o.v.muted = true;
             icon(o);
         });
-        holding = false;
     });
 
     if (!('IntersectionObserver' in window)) {
@@ -175,8 +194,8 @@
                 it.ratio = e.isIntersecting ? e.intersectionRatio : 0;
             }
         });
-        evaluate();
-    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+        apply();
+    }, { threshold: [0, 0.1, VISIBLE, 0.35, FOCUS, 0.65, 0.8, 1] });
 
     items.forEach((it) => {
         preloader.observe(it.v);
@@ -185,14 +204,14 @@
 
     document.addEventListener('undangan.open', () => {
         opened = true;
-        setTimeout(evaluate, 300);
+        setTimeout(apply, 300);
     });
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             items.forEach((o) => o.v.pause());
         } else {
-            evaluate();
+            apply();
         }
     });
 })();
