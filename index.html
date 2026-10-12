@@ -229,16 +229,10 @@
                         <div class="bg-theme-auto rounded-5 shadow p-3">
                             <h2 class="font-esthetic text-center py-2 mb-2" style="font-size: 2.125rem;">Kisah Cinta</h2>
 
-                            <!-- Jika tidak ingin menggunakan video, hapus seluruh tag dengan id="video-love-story" di bawah ini. -->
-                            <!-- If you don't want to use the video, remove the entire tag with id="video-love-story" below. -->
-
-                            <div id="video-love-stroy" class="position-relative rounded-4 mb-2 pb-0" data-src="./assets/video/265501_tiny.mp4" data-vid-class="w-100 rounded-4 shadow-sm m-0 p-0">
-                                <div class="position-absolute d-flex flex-column justify-content-center align-items-center top-50 start-50 translate-middle w-100 h-100 bg-overlay-auto rounded-4 z-3" id="video-love-stroy-loading">
-                                    <div class="progress w-25" role="progressbar" style="height: 0.5rem;" aria-label="progress bar">
-                                        <div class="progress-bar" id="progress-bar-video-love-stroy" style="width: 0%;"></div>
-                                    </div>
-                                    <small class="mt-1 text-theme-auto bg-theme-auto py-0 px-2 rounded-4" id="progress-info-video-love-stroy" style="font-size: 0.7rem;"></small>
-                                </div>
+                            <!-- Video Kisah Cinta (2 bagian). Diputar otomatis tanpa suara saat terlihat di layar, diatur oleh assets/js/love-video.js -->
+                            <div class="love-videos">
+                                <video class="love-video" src="./assets/video/kisah-cinta-1.mp4" poster="./assets/video/kisah-cinta-1-poster.jpg" muted loop playsinline preload="none" aria-label="Video kisah cinta 1"></video>
+                                <video class="love-video" src="./assets/video/kisah-cinta-2.mp4" poster="./assets/video/kisah-cinta-2-poster.jpg" muted loop playsinline preload="none" aria-label="Video kisah cinta 2"></video>
                             </div>
 
                             <div class="position-relative">
@@ -846,6 +840,7 @@
     <script defer src="./assets/js/ornament.js"></script>
     <script defer src="./assets/js/gift.js"></script>
     <script defer src="./assets/js/music.js"></script>
+    <script defer src="./assets/js/love-video.js"></script>
 </body>
 
 </html>
