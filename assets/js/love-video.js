@@ -4,8 +4,8 @@
  *   dan fullscreen.
  * - Kedua video berputar otomatis selama terlihat di layar dan berhenti saat
  *   di-scroll lewat. Video yang sengaja di-pause tamu tidak diputar ulang.
- * - Awalnya suara diambil dari video yang paling terlihat. Begitu tamu
- *   mengatur volume / play sendiri, pilihan tamu yang dipakai.
+ * - Kedua video awalnya tanpa suara (mute). Suara baru keluar setelah tamu
+ *   menekan tombol volume (unmute) di video tersebut.
  * - Hanya satu video yang bersuara: menyalakan suara satu video otomatis
  *   membisukan video lainnya.
  * - Selama ada video bersuara, musik latar website dijeda; musik lanjut lagi
@@ -25,10 +25,8 @@
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const VISIBLE = 0.2;   // diputar bila minimal 20% terlihat
-    const FOCUS = 0.5;     // suara otomatis ke video yang ≥50% terlihat
 
     let opened = false;    // setelah "Buka Undangan"
-    let manual = false;    // tamu sudah mengatur suara/putar sendiri
     let holding = false;
 
     const quiet = (it) => {
@@ -79,15 +77,6 @@
             return;
         }
 
-        let focus = null;
-        if (!manual) {
-            items.forEach((it) => {
-                if (it.ratio >= FOCUS && (!focus || it.ratio > focus.ratio)) {
-                    focus = it;
-                }
-            });
-        }
-
         items.forEach((it) => {
             const visible = it.ratio >= VISIBLE;
             if (!visible) {
@@ -100,15 +89,8 @@
             if (reduce || it.userPaused) {
                 return;
             }
-            if (!manual) {
-                const loud = it === focus;
-                if (it.v.paused) {
-                    playIt(it, loud);
-                } else if (it.v.muted === loud) {
-                    quiet(it);
-                    it.v.muted = !loud;
-                }
-            } else if (it.v.paused) {
+            if (it.v.paused) {
+                // awalnya tanpa suara; suara hanya keluar setelah tamu unmute sendiri
                 playIt(it, !it.v.muted);
             }
         });
@@ -121,7 +103,6 @@
 
         v.addEventListener('volumechange', () => {
             if (!isQuiet(it)) {
-                manual = true;
                 if (!v.muted && v.volume > 0) {
                     muteOthers(it);
                 }
@@ -131,7 +112,6 @@
 
         v.addEventListener('play', () => {
             if (!isQuiet(it)) {
-                manual = true;
                 it.userPaused = false;
                 if (!v.muted && v.volume > 0) {
                     muteOthers(it);
@@ -155,7 +135,6 @@
 
     // tamu menyalakan musik latar lewat tombol musik: semua video dibisukan
     document.addEventListener('undangan.music.user-play', () => {
-        manual = true;
         holding = false;
         items.forEach((o) => {
             quiet(o);
@@ -190,7 +169,7 @@
             }
         });
         apply();
-    }, { threshold: [0, 0.1, VISIBLE, 0.35, FOCUS, 0.65, 0.8, 1] });
+    }, { threshold: [0, 0.1, VISIBLE, 0.35, 0.5, 0.65, 0.8, 1] });
 
     items.forEach((it) => {
         preloader.observe(it.v);
