@@ -326,17 +326,10 @@ body::-webkit-scrollbar,
     min-width: 0;
 }
 
-/* Tampil: saat disentuh, di-hover (desktop), atau video sedang di-pause */
+/* Tampil: hanya setelah video diklik/disentuh tamu */
 .love-videos .love-video-wrap.lv-show .lv-bar {
     opacity: 1 !important;
     transform: none;
     pointer-events: auto !important;
 }
 
-@media (hover: hover) {
-    .love-videos .love-video-wrap:hover .lv-bar {
-        opacity: 1 !important;
-        transform: none;
-        pointer-events: auto !important;
-    }
-}

@@ -2,8 +2,8 @@
  * VIDEO KISAH CINTA (2 bagian) — bar kontrol sendiri, TANPA fullscreen
  * - Kontrol per video: play/pause, geser waktu, dan mute/unmute (tanpa slider volume).
  *   (Kontrol bawaan browser tidak dipakai karena di iPhone selalu ada fullscreen.)
- * - Bar kontrol tidak selalu tampil: muncul saat video disentuh/di-hover, lalu
- *   memudar sendiri setelah beberapa detik (tetap tampil selama video di-pause).
+ * - Tampilan awal tanpa bar kontrol. Bar baru muncul setelah video diklik/disentuh,
+ *   lalu memudar sendiri setelah beberapa detik (tetap tampil selama video di-pause).
  * - Kedua video berputar otomatis TANPA SUARA selama terlihat di layar dan
  *   berhenti saat di-scroll lewat. Video yang di-pause tamu tidak diputar ulang sendiri.
  * - Hanya satu video yang bersuara: unmute satu video otomatis membisukan lainnya.
@@ -22,7 +22,8 @@
         userPaused: false,
         seeking: false,
         hideTimer: 0,
-        hinted: false,
+        touched: false,  // bar kontrol baru boleh tampil setelah tamu mengklik video
+        wasShown: false,
     }));
     if (!items.length) {
         return;
@@ -47,6 +48,9 @@
 
     // tampilkan bar kontrol; sembunyikan lagi otomatis (kecuali sedang pause / geser waktu)
     const reveal = (it) => {
+        if (!it.touched) {
+            return;
+        }
         it.w.classList.add('lv-show');
         clearTimeout(it.hideTimer);
         it.hideTimer = setTimeout(() => {
@@ -66,7 +70,7 @@
             it.play.setAttribute('aria-label', v.paused ? 'Putar video' : 'Jeda video');
             it.mute.innerHTML = loud ? '<i class="fa-solid fa-volume-high"></i>' : '<i class="fa-solid fa-volume-xmark"></i>';
             it.mute.setAttribute('aria-label', loud ? 'Matikan suara video' : 'Nyalakan suara video');
-            if (v.paused) {
+            if (v.paused && it.touched) {
                 it.w.classList.add('lv-show');
             }
             it.w.classList.toggle('is-audible', audible(it));
@@ -127,10 +131,6 @@
                 if (it.v.paused && !it.userPaused && !reduce) {
                     start(it);
                 }
-                if (!it.hinted) {
-                    it.hinted = true;
-                    reveal(it);
-                }
             } else if (!it.v.paused) {
                 it.v.pause();
             }
@@ -156,12 +156,21 @@
         };
         it.play.addEventListener('click', togglePlay);
         v.addEventListener('click', () => {
+            // ketukan pertama pada video yang sedang berputar: cukup munculkan bar kontrol
+            if (!it.wasShown && !v.paused) {
+                reveal(it);
+                return;
+            }
             togglePlay();
             reveal(it);
         });
 
-        // tampilkan bar saat disentuh / digerakkan mouse / difokus keyboard
-        ['pointerdown', 'pointermove', 'focusin'].forEach((ev) => it.w.addEventListener(ev, () => reveal(it)));
+        // tampilkan bar hanya saat video diklik/disentuh (atau difokus keyboard)
+        ['pointerdown', 'focusin'].forEach((ev) => it.w.addEventListener(ev, () => {
+            it.wasShown = it.w.classList.contains('lv-show');
+            it.touched = true;
+            reveal(it);
+        }));
 
         // saat diputar lagi, mulai hitung mundur sembunyi
         v.addEventListener('play', () => reveal(it));
