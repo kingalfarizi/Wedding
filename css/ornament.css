@@ -987,37 +987,106 @@
     opacity: 1;
 }
 
-/* Video Kisah Cinta: tombol speaker untuk mute / unmute */
+/* Video Kisah Cinta: bar kontrol sendiri (play/pause, geser waktu, volume) — tanpa fullscreen */
 .love-video-wrap {
     position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
 }
 
 .love-video-wrap .love-video {
     cursor: pointer;
+    border-radius: 1rem;
 }
 
-.love-video-sound {
+.lv-bar {
     position: absolute;
-    right: 0.6rem;
-    bottom: 0.6rem;
-    width: 2.3rem;
-    height: 2.3rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.4rem 0.6rem 0.45rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    color: #fff;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.lv-btn {
+    flex: 0 0 auto;
+    width: 1.9rem;
+    height: 1.9rem;
     display: grid;
     place-items: center;
+    padding: 0;
     border: none;
     border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
     color: #fff;
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-    font-size: 0.95rem;
+    font-size: 0.8rem;
 }
 
-/* video yang sedang bersuara: cincin emas tipis + tombol emas */
-.love-video-wrap.is-audible .love-video {
+.lv-time {
+    flex: 0 0 auto;
+    min-width: 2.2rem;
+    font-size: 0.68rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.lv-seek,
+.lv-vol {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    margin: 0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #e2c794 var(--p, 0%), rgba(255, 255, 255, 0.35) var(--p, 0%));
+    cursor: pointer;
+}
+
+.lv-seek {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.lv-vol {
+    flex: 0 0 3.2rem;
+    width: 3.2rem;
+}
+
+.lv-seek::-webkit-slider-thumb,
+.lv-vol::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #f3dc9f;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.lv-seek::-moz-range-thumb,
+.lv-vol::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #f3dc9f;
+}
+
+/* iPhone tidak mengizinkan volume diatur dari halaman: slider disembunyikan */
+.love-video-wrap.no-vol .lv-vol {
+    display: none;
+}
+
+/* video yang sedang bersuara: cincin emas tipis + tombol suara emas */
+.love-video-wrap.is-audible {
     box-shadow: 0 0 0 2px #e2c794, 0 0.4rem 1rem rgba(0, 0, 0, 0.25);
 }
 
-.love-video-wrap.is-audible .love-video-sound {
+.love-video-wrap.is-audible .lv-mute {
     background: linear-gradient(135deg, #f3dc9f 0%, #c9a24f 50%, #f0d68f 100%);
     color: #3b2f25;
 }
