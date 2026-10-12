@@ -4,3 +4,8 @@ node_modules
 package-lock.json
 dist
 public
+
+# File video/foto mentah yang terlalu besar untuk GitHub (batas 100 MB per file)
+*.MOV
+*.mov
+assets/images/0000.mp4
