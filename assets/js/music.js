@@ -47,7 +47,31 @@
         play();
     });
 
-    button.addEventListener('click', () => (audio.paused ? play() : pause()));
+    // Video Kisah Cinta yang bersuara meminta musik latar berhenti sementara,
+    // lalu musik dilanjutkan lagi saat video berhenti / di-scroll lewat.
+    let held = false;
+    document.addEventListener('undangan.music.hold', () => {
+        held = true;
+        audio.pause();
+    });
+    document.addEventListener('undangan.music.release', () => {
+        held = false;
+        if (wantPlay && !document.hidden) {
+            audio.play().then(render).catch(render);
+        }
+    });
+
+    button.addEventListener('click', () => {
+        if (audio.paused) {
+            // tamu sengaja menyalakan musik: suara video dimatikan
+            if (held) {
+                document.dispatchEvent(new Event('undangan.music.user-play'));
+            }
+            play();
+        } else {
+            pause();
+        }
+    });
     audio.addEventListener('play', render);
     audio.addEventListener('pause', render);
 
@@ -55,7 +79,7 @@
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             audio.pause();
-        } else if (wantPlay) {
+        } else if (wantPlay && !held) {
             audio.play().catch(() => {});
         }
     });

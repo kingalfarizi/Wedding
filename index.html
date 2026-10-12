@@ -229,10 +229,16 @@
                         <div class="bg-theme-auto rounded-5 shadow p-3">
                             <h2 class="font-esthetic text-center py-2 mb-2" style="font-size: 2.125rem;">Kisah Cinta</h2>
 
-                            <!-- Video Kisah Cinta (2 bagian). Diputar otomatis tanpa suara saat terlihat di layar, diatur oleh assets/js/love-video.js -->
+                            <!-- Video Kisah Cinta (2 bagian). Diputar otomatis dengan suaranya sendiri saat terlihat (musik latar dijeda), diatur oleh assets/js/love-video.js -->
                             <div class="love-videos">
-                                <video class="love-video" src="./assets/video/kisah-cinta-1.mp4" poster="./assets/video/kisah-cinta-1-poster.jpg" muted loop playsinline preload="none" aria-label="Video kisah cinta 1"></video>
-                                <video class="love-video" src="./assets/video/kisah-cinta-2.mp4" poster="./assets/video/kisah-cinta-2-poster.jpg" muted loop playsinline preload="none" aria-label="Video kisah cinta 2"></video>
+                                <div class="love-video-wrap">
+                                    <video class="love-video" src="./assets/video/kisah-cinta-1.mp4" poster="./assets/video/kisah-cinta-1-poster.jpg" muted loop playsinline preload="none" aria-label="Video kisah cinta 1"></video>
+                                    <button type="button" class="love-video-sound" aria-label="Nyalakan suara video"><i class="fa-solid fa-volume-xmark"></i></button>
+                                </div>
+                                <div class="love-video-wrap">
+                                    <video class="love-video" src="./assets/video/kisah-cinta-2.mp4" poster="./assets/video/kisah-cinta-2-poster.jpg" muted loop playsinline preload="none" aria-label="Video kisah cinta 2"></video>
+                                    <button type="button" class="love-video-sound" aria-label="Nyalakan suara video"><i class="fa-solid fa-volume-xmark"></i></button>
+                                </div>
                             </div>
 
                             <div class="position-relative">
@@ -476,27 +482,6 @@
                                     </div>
                                     <div class="carousel-item">
                                         <img src="./assets/images/33333.webp" alt="image 11" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Carousel Baris 4 -->
-                            <div id="carousel-image-four" data-aos="fade-up" data-aos-duration="1500" class="carousel slide mt-4" data-bs-ride="carousel" data-bs-touch="true">
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carousel-image-four" data-bs-slide-to="0" class="active"></button>
-                                    <button type="button" data-bs-target="#carousel-image-four" data-bs-slide-to="1"></button>
-                                    <button type="button" data-bs-target="#carousel-image-four" data-bs-slide-to="2"></button>
-                                </div>
-
-                                <div class="carousel-inner rounded-4">
-                                    <div class="carousel-item active">
-                                        <img src="./assets/images/13.webp" alt="image 12" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./assets/images/16.webp" alt="image 13" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./assets/images/15.webp" alt="image 14" class="d-block img-fluid cursor-pointer" onclick="undangan.guest.modal(this)">
                                     </div>
                                 </div>
                             </div>
