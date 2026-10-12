@@ -905,7 +905,7 @@
 .photo-wreath-groom .photo-wreath-photo { width: 52.5% !important; }
 
 .photo-wreath-bride { width: min(22.75rem, 105vw); }
-.photo-wreath-bride .photo-wreath-photo { width: 46.5% !important; }
+.photo-wreath-bride .photo-wreath-photo { width: 51% !important; }
 
 .photo-wreath-half .photo-wreath-frame {
     animation-name: wreath-sway;
