@@ -891,7 +891,8 @@
    Kedua gambar sudah dibuat persegi dengan pusat lingkaran di tengah.
    groom: jari-jari dalam ±27% lebar gambar, bride: ±24% */
 .photo-wreath-half {
-    margin: 0.5rem auto 0.5rem;
+    margin: 0.5rem 0 0.5rem 50%;
+    translate: -50% 0; /* tetap di tengah walau sedikit lebih lebar dari kolom */
 }
 
 .photo-wreath-half .photo-wreath-photo {
@@ -900,10 +901,10 @@
     border: 2px solid #e2c794;
 }
 
-.photo-wreath-groom { width: min(18.5rem, 86vw); }
+.photo-wreath-groom { width: min(20.5rem, 95vw); }
 .photo-wreath-groom .photo-wreath-photo { width: 52.5% !important; }
 
-.photo-wreath-bride { width: min(20.5rem, 92vw); }
+.photo-wreath-bride { width: min(22.75rem, 105vw); }
 .photo-wreath-bride .photo-wreath-photo { width: 46.5% !important; }
 
 .photo-wreath-half .photo-wreath-frame {
