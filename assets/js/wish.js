@@ -4,7 +4,8 @@
  * Isi URL Web App pada atribut data-wish-url di <section id="wish"> (index.html).
  */
 (() => {
-    const PAGE_SIZE = 10;
+    const VISIBLE = 5;   // jumlah kartu yang terlihat sebelum daftar jadi scroll
+    const PEEK = 72;     // px di bawah kartu ke-5 (jarak antarkartu + bagian atas kartu ke-6 yang mengintip)
     const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 
     const section = document.getElementById('wish');
@@ -23,7 +24,63 @@
     const more = document.getElementById('wish-more');
 
     let wishes = [];
-    let shown = PAGE_SIZE;
+
+    // Semua ucapan ditampilkan di dalam kotak scroll, jadi tombol "Lihat ucapan lainnya" tidak dipakai.
+    more.hidden = true;
+
+    const hint = document.createElement('p');
+    hint.className = 'wish-scroll-hint';
+    hint.textContent = 'Geser di dalam kotak untuk melihat ucapan lainnya';
+    hint.hidden = true;
+    list.after(hint);
+
+    // ===== Daftar ucapan bisa di-scroll setelah lebih dari 5 ucapan =====
+    const updateEnd = () => {
+        const atEnd = list.scrollTop + list.clientHeight >= list.scrollHeight - 4;
+        list.classList.toggle('is-end', atEnd);
+    };
+
+    const fitList = () => {
+        const cards = list.querySelectorAll('.wish-card');
+
+        if (cards.length <= VISIBLE) {
+            list.classList.remove('wish-list-scroll', 'is-end');
+            list.style.maxHeight = '';
+            hint.hidden = true;
+            return;
+        }
+
+        list.classList.add('wish-list-scroll');
+        const last = cards[VISIBLE - 1];
+        // offsetTop dihitung dari tepi atas .wish-list (position: relative)
+        if (last.offsetHeight > 0) {
+            list.style.maxHeight = `${last.offsetTop + last.offsetHeight + PEEK}px`;
+        }
+        hint.hidden = false;
+        updateEnd();
+    };
+
+    // Hitung ulang saat ukuran kartu berubah (font selesai dimuat, layar diputar,
+    // atau bagian ini baru terlihat setelah "Buka Undangan").
+    const sizer = 'ResizeObserver' in window
+        ? new ResizeObserver(() => requestAnimationFrame(fitList))
+        : null;
+
+    const watchSizes = () => {
+        if (!sizer) {
+            return;
+        }
+        sizer.disconnect();
+        sizer.observe(list);
+        list.querySelectorAll('.wish-card').forEach((card, i) => {
+            if (i < VISIBLE) {
+                sizer.observe(card);
+            }
+        });
+    };
+
+    list.addEventListener('scroll', updateEnd, { passive: true });
+    window.addEventListener('resize', () => requestAnimationFrame(fitList));
 
     const pad = (n) => String(n).padStart(2, '0');
 
@@ -103,12 +160,15 @@
             list.appendChild(empty);
         }
 
-        wishes.slice(0, shown).forEach((w) => {
+        wishes.forEach((w) => {
             const card = createCard(w);
             list.appendChild(card);
             reveal(card);
         });
-        more.hidden = wishes.length <= shown;
+
+        list.scrollTop = 0;
+        fitList();
+        watchSizes();
     };
 
     /**
@@ -252,11 +312,10 @@
             card.classList.add('wish-card-anim', 'is-in', 'wish-card-new');
             list.prepend(card);
 
-            const cards = list.querySelectorAll('.wish-card');
-            if (cards.length > shown) {
-                cards[cards.length - 1].remove();
-            }
-            more.hidden = wishes.length <= shown;
+            // kembali ke paling atas supaya ucapan baru langsung terlihat
+            list.scrollTop = 0;
+            fitList();
+            watchSizes();
 
             inputWish.value = '';
             showAlert('Terima kasih atas ucapan dan doanya!', 'success');
@@ -292,18 +351,6 @@
     // (tombol bawaan template, konfetinya dulu ikut dimatikan bersama konfeti "Buka Undangan").
     document.querySelectorAll('[onclick*="showStory"]').forEach((btn) => {
         btn.addEventListener('click', () => celebrate(btn));
-    });
-
-    // "Lihat ucapan lainnya": hanya kartu baru yang ditambahkan & dianimasikan.
-    more.addEventListener('click', () => {
-        const start = list.querySelectorAll('.wish-card').length;
-        shown += PAGE_SIZE;
-        wishes.slice(start, shown).forEach((w) => {
-            const card = createCard(w);
-            list.appendChild(card);
-            reveal(card);
-        });
-        more.hidden = wishes.length <= shown;
     });
 
     form.addEventListener('submit', send);

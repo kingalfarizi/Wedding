@@ -118,7 +118,56 @@
 }
 
 .section-wish .wish-list {
+    position: relative;
     margin-top: 1.5rem;
+}
+
+/* Lebih dari 5 ucapan: daftar jadi kotak yang bisa di-scroll.
+   Tinggi kotak (max-height) dihitung oleh assets/js/wish.js = 5 kartu + sedikit kartu ke-6. */
+.section-wish .wish-list.wish-list-scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    /* ruang supaya bayangan & efek hover kartu tidak terpotong */
+    margin-left: -0.6rem;
+    margin-right: -0.6rem;
+    padding: 0.6rem 0.6rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(226, 199, 148, 0.7) transparent;
+    /* bagian bawah memudar sebagai tanda masih ada ucapan lain */
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2.25rem), transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 2.25rem), transparent 100%);
+}
+
+.section-wish .wish-more[hidden],
+.section-wish .wish-scroll-hint[hidden] {
+    display: none;
+}
+
+/* Sudah sampai ucapan paling bawah: efek pudar dihilangkan */
+.section-wish .wish-list.wish-list-scroll.is-end {
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+.section-wish .wish-list.wish-list-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.section-wish .wish-list.wish-list-scroll::-webkit-scrollbar-thumb {
+    background: rgba(226, 199, 148, 0.7);
+    border-radius: 4px;
+}
+
+.section-wish .wish-list.wish-list-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.section-wish .wish-scroll-hint {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.8rem;
+    margin: 0.6rem 0 0;
 }
 
 /* Kartu ucapan — gaya kartu gading-emas berbingkai, senada dengan kartu alamat */
