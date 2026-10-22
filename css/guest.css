@@ -333,3 +333,23 @@ body::-webkit-scrollbar,
     pointer-events: auto !important;
 }
 
+
+/* Kunci baris: setiap <span> di dalam .kunci-baris tampil sebagai satu baris
+   dan tidak pernah dipotong/digabung. Ukuran huruf mengecil otomatis
+   mengikuti lebar kolom supaya baris terpanjang tetap muat.
+   --kb     = lebar baris terpanjang (dalam em) + sedikit cadangan
+   --kb-pad = padding kiri+kanan paragraf
+   --kb-max = ukuran huruf maksimal */
+.kunci-baris-wrap {
+    container-type: inline-size;
+}
+
+.kunci-baris {
+    font-size: min(var(--kb-max, 0.95rem), calc((100vw - 1.5rem - var(--kb-pad, 0px)) / var(--kb)));
+    font-size: min(var(--kb-max, 0.95rem), calc((100cqi - var(--kb-pad, 0px)) / var(--kb)));
+}
+
+.kunci-baris > span {
+    display: block;
+    white-space: nowrap;
+}
